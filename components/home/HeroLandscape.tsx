@@ -170,9 +170,10 @@ export function HeroLandscape({
       {/* Fibra: entra desde el campo y recorre la calle. */}
       <path d={FIBER} fill="none" stroke={LIME} strokeWidth="3.5" strokeLinecap="round" />
       <path className="hero-flow" d={FIBER} fill="none" stroke="var(--fiber-pulse)" strokeWidth="7" strokeLinecap="round" />
-      <g fill={LIME}>
+      {/* Puntos de conexión: relleno del edificio y borde del pulso, para contrastar con la fibra. */}
+      <g fill="var(--bld)" stroke="var(--fiber-pulse)" strokeWidth="2.5">
         {FIBER_NODES.map((cx) => (
-          <circle key={cx} cx={cx} cy="614" r="4" />
+          <circle key={cx} cx={cx} cy="614" r="5.5" />
         ))}
       </g>
 
@@ -303,11 +304,11 @@ export function HeroLandscapeMobile({ className }: { className?: string }) {
         strokeWidth="5.5"
         strokeLinecap="round"
       />
-      <g fill={LIME}>
-        <circle cx="28" cy="156" r="3" />
-        <circle cx="61" cy="156" r="3" />
-        <circle cx="111" cy="156" r="3" />
-        <circle cx="168" cy="156" r="3" />
+      <g fill="var(--bld)" stroke="var(--fiber-pulse)" strokeWidth="1.8">
+        <circle cx="28" cy="156" r="3.8" />
+        <circle cx="61" cy="156" r="3.8" />
+        <circle cx="111" cy="156" r="3.8" />
+        <circle cx="168" cy="156" r="3.8" />
       </g>
 
       {/* Antena */}
