@@ -205,6 +205,7 @@
   --tag-text: #17163a;
   --tree: #6a7a1c;
   --tree-sh: #55621c;
+  --fiber-pulse: #48531d;
   --map-bg: #f8faf5;
   --contour: rgb(23 22 58 / 10%);
   --card-shadow: var(--shadow-iwana);
@@ -271,6 +272,7 @@
   --tag-text: #f0f0f0;
   --tree: #3b4a12;
   --tree-sh: #2e3a0e;
+  --fiber-pulse: #c5e668;
   --map-bg: #2a2a2a;
   --contour: rgb(240 240 240 / 8%);
   --card-shadow: none;
@@ -338,6 +340,7 @@
     --tag-text: #f0f0f0;
     --tree: #3b4a12;
     --tree-sh: #2e3a0e;
+    --fiber-pulse: #c5e668;
     --map-bg: #2a2a2a;
     --contour: rgb(240 240 240 / 8%);
     --card-shadow: none;

@@ -19,6 +19,17 @@ const STARS = [
 const FIBER = "M0 712 C180 700 360 690 470 660 C510 648 530 630 540 614 L1085 614";
 const FIBER_NODES = [568, 613, 690, 769, 852, 933, 1008];
 
+/** Árbol con tronco y copa en dos tonos (lado en sombra), apoyado en `y`. */
+function Tree({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g>
+      <path d={`M${x} ${y} v${-11 * s}`} stroke="var(--tree-sh)" strokeWidth={3 * s} strokeLinecap="round" />
+      <circle cx={x} cy={y - 18 * s} r={10 * s} fill="var(--tree)" />
+      <path d={`M${x} ${y - 28 * s} a${10 * s} ${10 * s} 0 0 1 0 ${20 * s}`} fill="var(--tree-sh)" />
+    </g>
+  );
+}
+
 function Tag({ x, y, width, label }: { x: number; y: number; width: number; label: string }) {
   return (
     <g fontFamily="var(--font-sans)" fontSize="13" fontWeight="600">
@@ -157,8 +168,8 @@ export function HeroLandscape({
       </g>
 
       {/* Fibra: entra desde el campo y recorre la calle. */}
-      <path d={FIBER} fill="none" stroke={LIME} strokeWidth="3" strokeLinecap="round" opacity=".55" />
-      <path className="hero-flow" d={FIBER} fill="none" stroke={LIME} strokeWidth="4" strokeLinecap="round" />
+      <path d={FIBER} fill="none" stroke={LIME} strokeWidth="3.5" strokeLinecap="round" />
+      <path className="hero-flow" d={FIBER} fill="none" stroke="var(--fiber-pulse)" strokeWidth="5" strokeLinecap="round" />
       <g fill={LIME}>
         {FIBER_NODES.map((cx) => (
           <circle key={cx} cx={cx} cy="614" r="4" />
@@ -187,11 +198,12 @@ export function HeroLandscape({
         <path d="M70 724 C200 714 320 712 450 720" />
         <path d="M80 742 C220 732 340 730 470 738" />
       </g>
-      <g fill="var(--tree)">
-        <circle cx="110" cy="660" r="11" />
-        <circle cx="300" cy="652" r="9" />
-        <circle cx="470" cy="664" r="10" />
-      </g>
+      {/* Arboleda de las fincas, lejos de la línea de fibra. */}
+      <Tree x={96} y={662} s={1.1} />
+      <Tree x={124} y={666} s={1.35} />
+      <Tree x={152} y={664} s={0.95} />
+      <Tree x={316} y={656} s={1.15} />
+      <Tree x={340} y={658} s={0.9} />
 
       {/* Haces de Radio Enlace hacia tres fincas de la colina. */}
       <g stroke={LIME} strokeWidth="2" strokeDasharray="4 6" fill="none" strokeLinecap="round" className="hero-beam">
@@ -267,13 +279,13 @@ export function HeroLandscapeMobile({ className }: { className?: string }) {
       <rect x="151" y="130" width="22" height="14" fill="url(#hm-win)" />
 
       {/* Fibra */}
-      <path d="M0 156 L196 156" fill="none" stroke={LIME} strokeWidth="2.5" strokeLinecap="round" opacity=".55" />
+      <path d="M0 156 L196 156" fill="none" stroke={LIME} strokeWidth="3" strokeLinecap="round" />
       <path
         className="hero-flow-sm"
         d="M0 156 L196 156"
         fill="none"
-        stroke={LIME}
-        strokeWidth="3.5"
+        stroke="var(--fiber-pulse)"
+        strokeWidth="4.5"
         strokeLinecap="round"
       />
       <g fill={LIME}>
@@ -303,10 +315,9 @@ export function HeroLandscapeMobile({ className }: { className?: string }) {
         <path d="M224 200 l14 -12 l14 12 v16 h-28 Z" />
         <path d="M348 190 l14 -12 l14 12 v16 h-28 Z" />
       </g>
-      <g fill="var(--tree)">
-        <circle cx="40" cy="198" r="7" />
-        <circle cx="300" cy="204" r="6" />
-      </g>
+      <Tree x={30} y={206} s={0.7} />
+      <Tree x={46} y={208} s={0.85} />
+      <Tree x={300} y={210} s={0.6} />
       <g fontFamily="var(--font-sans)" fontSize="11" fontWeight="600">
         <rect x="52" y="64" width="98" height="22" rx="11" fill="var(--tag-bg)" />
         <circle cx="65" cy="75" r="4" fill={LIME} />
