@@ -50,7 +50,7 @@ export default function PagarPage() {
       <main>
         <PayHero />
 
-        <section className="py-22">
+        <section className="py-14">
           <div className="wrap">
             <SectionHead eyebrow="Cómo pagar" title="Tres pasos y listo." />
             <ol className="m-0 grid list-none gap-5 p-0 min-[900px]:grid-cols-3">
@@ -67,13 +67,13 @@ export default function PagarPage() {
           </div>
         </section>
 
-        <section className="bg-bg-alt py-18">
+        <section className="bg-bg-alt py-14">
           <div className="wrap">
             <SafePayment />
           </div>
         </section>
 
-        <section id="puntos" className="scroll-mt-20 py-22">
+        <section id="puntos" className="scroll-mt-20 py-14">
           <div className="wrap">
             <SectionHead
               eyebrow="Otras formas de pago"
@@ -111,7 +111,7 @@ export default function PagarPage() {
           </div>
         </section>
 
-        <section className="bg-deep py-18 text-white">
+        <section className="bg-deep py-14 text-white">
           <div className="wrap flex flex-col gap-6 min-[960px]:flex-row min-[960px]:items-center min-[960px]:justify-between">
             <div>
               <h2 className="text-[clamp(1.75rem,1.2rem+1.8vw,2.25rem)] font-bold tracking-[-.024em]">
@@ -142,7 +142,7 @@ export default function PagarPage() {
 
 function PayHero() {
   return (
-    <section className="bg-bg-alt pt-10 pb-20 lg:pt-12 lg:pb-26">
+    <section className="bg-bg-alt pt-10 pb-16 lg:pt-12 lg:pb-18">
       <div className="wrap">
         <nav aria-label="Ruta" className="flex items-center gap-2 text-[13px] text-muted">
           <Link href={ROUTES.inicio} className="no-underline hover:underline">

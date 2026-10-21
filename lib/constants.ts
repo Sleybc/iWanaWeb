@@ -63,13 +63,23 @@ export type Office = {
   mapUrl: string;
 };
 
+const TENA_HOURS: OfficeHours[] = [
+  { days: "Lunes y viernes", times: ["8:00 a. m. – 5:00 p. m."] },
+  { days: "Martes a jueves", times: ["8:00 a. m. – 4:00 p. m."] },
+  { days: "Sábado", times: ["8:00 a. m. – 1:00 p. m."] },
+  { days: "Domingo", times: [] },
+];
+
 export const OFFICES: Office[] = [
   {
     name: "El Colegio",
     address: "Carrera 7 # 8-55",
     town: "El Colegio",
+    // Entre semana, el mismo horario de Tena (confirmado por iWana el 2026-10-21).
     hours: [
-      { days: "Lunes a sábado", times: ["8:00 a. m. – 5:00 p. m."] },
+      { days: "Lunes y viernes", times: ["8:00 a. m. – 5:00 p. m."] },
+      { days: "Martes a jueves", times: ["8:00 a. m. – 4:00 p. m."] },
+      { days: "Sábado", times: ["8:00 a. m. – 5:00 p. m."] },
       { days: "Domingos y festivos", times: ["8:00 a. m. – 1:00 p. m.", "2:00 – 5:00 p. m."] },
     ],
     mapUrl: "https://maps.app.goo.gl/NmAoER9qNzfAhccd9",
@@ -78,22 +88,15 @@ export const OFFICES: Office[] = [
     name: "San Antonio del Tequendama",
     address: "Carrera 5 # 4A-01, piso 2",
     town: "San Antonio del Tequendama",
-    hours: [
-      { days: "Lunes a viernes", times: ["8:00 a. m. – 1:00 p. m.", "2:00 – 5:00 p. m."] },
-      { days: "Sábado", times: ["8:00 a. m. – 1:00 p. m."] },
-    ],
+    // El mismo horario de Tena (confirmado por iWana el 2026-10-21).
+    hours: TENA_HOURS,
     mapUrl: "https://maps.app.goo.gl/kiLzE1zvrhB4CBrG6",
   },
   {
     name: "Tena",
     address: "IPM, Calle 2, vía Tena / La Gran Vía # 5-76",
     town: "Tena",
-    hours: [
-      { days: "Lunes y viernes", times: ["8:00 a. m. – 5:00 p. m."] },
-      { days: "Martes a jueves", times: ["8:00 a. m. – 4:00 p. m."] },
-      { days: "Sábado", times: ["8:00 a. m. – 1:00 p. m."] },
-      { days: "Domingo", times: [] },
-    ],
+    hours: TENA_HOURS,
     mapUrl: "https://maps.app.goo.gl/hY2PKKsq5CVkTshP7",
   },
 ];
@@ -137,14 +140,15 @@ export function waTownLink(town: TownName): string {
 
 /**
  * Planes por perfil de uso, sin velocidad (RESUMEN §3, decisiones 6 y 8).
- * Todos incluyen internet ilimitado, zona Wi-Fi, conexión segura, un punto
- * cableado y subida igual a la mitad de la bajada.
+ * Todos incluyen internet ilimitado, zona Wi-Fi, conexión segura y una carga
+ * igual a la mitad de la descarga. El punto cableado solo va en Medio y Alto
+ * (confirmado por iWana el 2026-10-21).
  */
 export const PLANS = [
-  { name: "Plan Básico", price: "$55.000", title: "Lo esencial" },
-  { name: "Plan Básico +", price: "$65.000", title: "Un paso más" },
-  { name: "Plan Medio", price: "$79.000", title: "Para toda la familia", popular: true },
-  { name: "Plan Alto", price: "$100.000", title: "Hogares muy conectados y negocios" },
+  { name: "Plan Básico", price: "$55.000", title: "Lo esencial", wiredPoint: false },
+  { name: "Plan Básico +", price: "$65.000", title: "Un paso más", wiredPoint: false },
+  { name: "Plan Medio", price: "$79.000", title: "Para toda la familia", popular: true, wiredPoint: true },
+  { name: "Plan Alto", price: "$100.000", title: "Hogares muy conectados y negocios", wiredPoint: true },
 ] as const;
 
 export type PlanName = (typeof PLANS)[number]["name"];

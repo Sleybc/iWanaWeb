@@ -138,7 +138,7 @@ export default function PrivacidadPage() {
           </div>
         </section>
 
-        <div className="wrap grid gap-8 pt-12 pb-24 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-16 print:block">
+        <div className="wrap grid gap-8 pt-12 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-16 print:block">
           <nav
             aria-label="En esta página"
             className={`${cardClass} self-start px-[22px] py-5 lg:sticky lg:top-24 print:hidden`}

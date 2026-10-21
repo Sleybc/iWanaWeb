@@ -35,7 +35,7 @@ export default function ContactoPage() {
     <>
       <Header current="contacto" />
       <main>
-        <section className="bg-bg-alt pt-10 pb-24">
+        <section className="bg-bg-alt pt-10 pb-16">
           <div className="wrap">
             <nav aria-label="Ruta" className="flex items-center gap-2 text-[13px] text-muted">
               <Link href={ROUTES.inicio} className="no-underline hover:underline">
@@ -146,12 +146,12 @@ export default function ContactoPage() {
           </div>
         </section>
 
-        <section id="puntos" className="scroll-mt-20 py-22">
+        <section id="puntos" className="scroll-mt-20 py-14">
           <div className="wrap">
             <div className="mb-10">
               <Eyebrow>Puntos de atención</Eyebrow>
               <h2 className="mt-3 text-[clamp(1.75rem,1.2rem+1.8vw,2.25rem)] font-bold leading-[1.15] tracking-[-.024em]">
-                Visítanos en la región.
+                Visítanos.
               </h2>
             </div>
             <div className="grid gap-6 min-[960px]:grid-cols-3">
@@ -162,7 +162,7 @@ export default function ContactoPage() {
           </div>
         </section>
 
-        <section className="bg-bg-alt py-18">
+        <section className="bg-bg-alt py-14">
           <div className="wrap">
             <div className={`${cardClass} grid items-center gap-6 p-9 min-[900px]:grid-cols-[minmax(0,1fr)_auto]`}>
               <div>

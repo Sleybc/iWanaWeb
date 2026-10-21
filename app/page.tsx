@@ -26,7 +26,7 @@ const townCount = COVERAGE.municipios.length + COVERAGE.rurales.length;
 
 const h2Class = "mt-3.5 text-[clamp(1.9rem,1.2rem+2.2vw,2.75rem)] font-bold leading-[1.1] tracking-[-.028em]";
 const leadClass = "mt-4 max-w-[620px] text-[1.0625rem] text-muted";
-const secClass = "scroll-mt-20 py-22 lg:py-30";
+const secClass = "scroll-mt-20 py-14 lg:py-18";
 const iconCircle = "grid shrink-0 place-items-center rounded-pill bg-badge-bg text-badge-text";
 
 const FACTS: { icon: ReactNode; title: string; text: string }[] = [
@@ -95,8 +95,7 @@ export default function Home() {
               Internet estable para tu casa, <em className="not-italic text-accent-text">finca y negocio.</em>
             </h1>
             <p className="mt-[22px] max-w-[600px] text-[1.1875rem] text-hero-muted">
-              En el pueblo y en el campo. Llegamos con Fibra Óptica o Radio Enlace, al mismo precio, con atención y
-              soporte locales.
+              Llegamos con Fibra Óptica o Radio Enlace, al mismo precio, con atención y soporte locales.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#planes" className={buttonClass("primary")}>
@@ -132,7 +131,7 @@ export default function Home() {
           </div>
         </div>
 
-        <section id="clientes" aria-labelledby="clientes-titulo" className="pt-18 pb-22">
+        <section id="clientes" aria-labelledby="clientes-titulo" className="pt-14 pb-14">
           <div className="wrap">
             <div className="mb-8">
               <Eyebrow>Clientes</Eyebrow>
@@ -282,7 +281,7 @@ export default function Home() {
 
         <section id="puntos" className={secClass}>
           <div className="wrap">
-            <SecHead eyebrow="Puntos de atención" title="Visítanos en la región." />
+            <SecHead eyebrow="Puntos de atención" title="Visítanos." />
             <div className="grid gap-6 min-[960px]:grid-cols-3">
               {OFFICES.map((office) => (
                 <OfficeCard key={office.name} office={office} />
@@ -291,7 +290,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-deep py-24 text-white">
+        <section className="relative overflow-hidden bg-deep py-16 text-white">
           <svg
             viewBox="0 0 1440 300"
             preserveAspectRatio="none"
@@ -338,7 +337,7 @@ export default function Home() {
 
 function SecHead({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) {
   return (
-    <div className="mb-14">
+    <div className="mb-10">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 className={h2Class}>{title}</h2>
       {lead ? <p className={leadClass}>{lead}</p> : null}

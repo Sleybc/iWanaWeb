@@ -66,7 +66,7 @@ const TILES: { icon: ReactNode; title: string; text: string }[] = [
   {
     icon: <path d={ICONS.wifi} />,
     title: "Internet ilimitado",
-    text: "Para tu casa, tu finca o tu negocio, con zona Wi-Fi y un punto cableado incluidos.",
+    text: "Para tu casa, tu finca o tu negocio, con zona Wi-Fi incluida.",
   },
   {
     icon: <path d={ICONS.headset} />,
@@ -151,7 +151,7 @@ export default function EmpresaPage() {
           </svg>
         </section>
 
-        <section className="pt-28 pb-22">
+        <section className="pt-24 pb-14">
           <div className="wrap">
             <SectionHead eyebrow="Dónde estamos" title="En el pueblo y en el campo." />
             <div className="grid gap-6 min-[900px]:grid-cols-2">
@@ -172,7 +172,7 @@ export default function EmpresaPage() {
           </div>
         </section>
 
-        <section className="bg-bg-alt py-22">
+        <section className="bg-bg-alt py-14">
           <div className="wrap">
             <SectionHead
               eyebrow="Lo que hacemos"
@@ -195,7 +195,7 @@ export default function EmpresaPage() {
           </div>
         </section>
 
-        <section className="py-22">
+        <section className="py-14">
           <div className="wrap">
             <SectionHead eyebrow="Cómo contratar" title="Tres pasos para conectarte." />
             <ol className="m-0 grid list-none gap-5 p-0 min-[900px]:grid-cols-3">
@@ -223,7 +223,7 @@ export default function EmpresaPage() {
           </div>
         </section>
 
-        <section className="bg-bg-alt py-18">
+        <section className="bg-bg-alt py-14">
           <div className="wrap">
             <div className="mb-6">
               <Eyebrow>Datos de la empresa</Eyebrow>
@@ -243,7 +243,7 @@ export default function EmpresaPage() {
           </div>
         </section>
 
-        <section className="bg-deep py-20 text-white">
+        <section className="bg-deep py-14 text-white">
           <div className="wrap flex flex-col gap-6 min-[960px]:flex-row min-[960px]:items-center min-[960px]:justify-between">
             <div>
               <h2 className="text-[clamp(1.75rem,1.2rem+1.8vw,2.5rem)] font-bold tracking-[-.024em]">

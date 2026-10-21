@@ -1,5 +1,6 @@
 // Paisaje de la portada (lienzo Main.dc.html): de día en claro y de noche en
-// oscuro, solo con tokens. Colina con antena de Radio Enlace (zona rural) y
+// oscuro, solo con tokens. Colina con antena de Radio Enlace que conecta tres
+// casas (zona rural) y
 // casco urbano con la red de fibra por la calle.
 const STARS = [
   [160, 90, 1.6],
@@ -98,13 +99,14 @@ export function HeroLandscape() {
         <path d="M160 716 C280 706 400 706 540 714" />
         <path d="M170 732 C300 722 420 722 560 730" />
       </g>
-      <path d="M478 482 L260 632 M478 482 L404 636" stroke={LIME} strokeWidth="1.5" strokeDasharray="3 7" fill="none" />
+      <path d="M478 482 L260 632 M478 482 L404 636 M478 482 L566 640" stroke={LIME} strokeWidth="1.5" strokeDasharray="3 7" fill="none" />
       <g fill="var(--house)">
         <path d="M240 650 l18 -16 l18 16 v18 h-36 Z" />
         <path d="M386 652 l18 -16 l18 16 v18 h-36 Z" />
+        <path d="M540 658 l18 -16 l18 16 v18 h-36 Z" />
       </g>
       <g stroke="var(--house)" strokeWidth="2" strokeLinecap="round">
-        <path d="M268 640 v-10 M263 630 h10 M414 642 v-10 M409 632 h10" />
+        <path d="M268 640 v-10 M263 630 h10 M414 642 v-10 M409 632 h10 M568 648 v-10 M563 638 h10" />
       </g>
       <g fill="var(--tree)">
         <circle cx="196" cy="652" r="12" />

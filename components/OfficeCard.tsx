@@ -37,7 +37,7 @@ export function OfficeCard({ office }: { office: Office }) {
         ))}
       </dl>
       <ExternalLink href={office.mapUrl} className={`${buttonClass("ghost")} m-6 mt-5 self-start`}>
-        Cómo llegar (Google Maps)
+        Cómo llegar
         <span className="sr-only">a la sede de {office.name} (se abre en otra pestaña)</span>
       </ExternalLink>
     </article>

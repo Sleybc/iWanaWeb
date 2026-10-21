@@ -25,9 +25,9 @@ const READINGS = [
   { icon: ICONS.download, title: "Descarga", text: "Qué tan rápido recibes: páginas, videos, series y descargas." },
   {
     icon: ICONS.upload,
-    title: "Subida",
-    // RESUMEN §3, decisión 8: subida igual a la mitad de la bajada.
-    text: "Qué tan rápido envías: videollamadas, fotos y archivos. En tu plan es la mitad de tu velocidad de bajada.",
+    title: "Carga",
+    // RESUMEN §3, decisión 8: carga igual a la mitad de la descarga.
+    text: "Qué tan rápido envías: videollamadas, fotos y archivos. En tu plan es la mitad de tu velocidad de descarga.",
   },
   {
     icon: ICONS.clock,
@@ -50,7 +50,7 @@ export default function TestPage() {
     <>
       <Header current="test" />
       <main>
-        <section className="bg-bg-alt pt-10 pb-22 lg:pt-12 lg:pb-26">
+        <section className="bg-bg-alt pt-10 pb-16 lg:pt-12 lg:pb-18">
           <div className="wrap">
             <nav aria-label="Ruta" className="flex items-center gap-2 text-[13px] text-muted">
               <Link href={ROUTES.inicio} className="no-underline hover:underline">
@@ -104,7 +104,7 @@ export default function TestPage() {
           </div>
         </section>
 
-        <section className="py-22">
+        <section className="py-14">
           <div className="wrap">
             <SectionHead eyebrow="Tu resultado" title="¿Cómo leer tu resultado?" />
             <div className="grid gap-5 min-[900px]:grid-cols-3">
@@ -131,7 +131,7 @@ export default function TestPage() {
           </div>
         </section>
 
-        <section className="bg-deep py-20 text-white">
+        <section className="bg-deep py-14 text-white">
           <div className="wrap">
             <h2 className="text-[clamp(1.75rem,1.2rem+1.8vw,2.25rem)] font-bold tracking-[-.024em]">¿Te salió bajo?</h2>
             <p className="mt-2.5 text-[1.0625rem] text-iwana-primary-200">Antes de reportarlo, haz esto:</p>

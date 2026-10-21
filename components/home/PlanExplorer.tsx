@@ -51,14 +51,16 @@ const USES = [
   },
 ];
 
-const INCLUDED = [
-  ["Internet", "Ilimitado"],
-  ["Zona Wi-Fi", "Incluida"],
-  ["Conexión segura", "Incluida"],
-  ["Punto cableado", "1"],
-  ["Subida", "La mitad de tu bajada"],
-  ["Tecnología", "Fibra o Radio Enlace"],
-] as const;
+function included(wiredPoint: boolean): [string, string][] {
+  return [
+    ["Internet", "Ilimitado"],
+    ["Zona Wi-Fi", "Incluida"],
+    ["Conexión segura", "Incluida"],
+    ["Punto cableado", wiredPoint ? "1" : "No incluido"],
+    ["Carga", "La mitad de tu descarga"],
+    ["Tecnología", "Fibra o Radio Enlace"],
+  ];
+}
 
 export function PlanExplorer() {
   // El lienzo abre con el Plan Medio (el popular) seleccionado.
@@ -136,7 +138,7 @@ export function PlanExplorer() {
           </div>
           <div className="mt-2.5 text-lg font-semibold">{plan.title}</div>
           <dl className="m-0 mt-5 border-t border-line-soft">
-            {INCLUDED.map(([k, v]) => (
+            {included(plan.wiredPoint).map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 border-b border-line-soft py-3 text-[15px]">
                 <dt className="text-muted">{k}</dt>
                 <dd className="m-0 text-right font-semibold">{v}</dd>

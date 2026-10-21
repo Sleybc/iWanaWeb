@@ -33,7 +33,7 @@ const STEPS = [
     short: "Conectividad",
     title: "Empiezas a navegar",
     desc: "Disfruta tu plan con internet ilimitado y zona Wi-Fi desde el primer día.",
-    tip: "Todos los planes incluyen un punto cableado.",
+    tip: "Los planes Medio y Alto incluyen un punto cableado.",
     icon: ICONS.wifi,
   },
   {
