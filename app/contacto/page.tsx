@@ -97,6 +97,17 @@ export default function ContactoPage() {
               </article>
             </div>
 
+            {/* Aviso antifraude (RESUMEN §5). */}
+            <p role="note" className="mt-5 flex items-start gap-2.5 text-sm text-muted">
+              <Icon d={ICONS.shield} className="mt-0.5 size-4 text-accent-text" />
+              <span>
+                <strong className="font-semibold text-text">Nuestro único WhatsApp oficial es el{" "}
+                  <span className="whitespace-nowrap">{WHATSAPP_DISPLAY}</span>.
+                </strong>{" "}
+                iWana nunca te pedirá claves, códigos del banco ni datos de tarjeta.
+              </span>
+            </p>
+
             <div
               role="group"
               aria-label="Escríbenos según tu motivo"
