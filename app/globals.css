@@ -496,12 +496,12 @@
 /* Portada: pulso de la fibra y de los haces de Radio Enlace. */
 @layer components {
   .hero-flow {
-    stroke-dasharray: 22 560;
-    animation: hero-flow 4.5s linear infinite;
+    stroke-dasharray: 90 492;
+    animation: hero-flow 4s linear infinite;
   }
   .hero-flow-sm {
-    stroke-dasharray: 14 300;
-    animation: hero-flow-sm 3.5s linear infinite;
+    stroke-dasharray: 44 270;
+    animation: hero-flow-sm 3s linear infinite;
   }
   .hero-beam {
     animation: hero-beam 1.6s linear infinite;
@@ -523,10 +523,10 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  /* Sin movimiento, el pulso queda quieto pero visible. */
   .hero-flow,
   .hero-flow-sm {
     animation: none;
-    opacity: 0;
   }
   .hero-beam {
     animation: none;

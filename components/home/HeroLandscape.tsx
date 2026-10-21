@@ -169,7 +169,7 @@ export function HeroLandscape({
 
       {/* Fibra: entra desde el campo y recorre la calle. */}
       <path d={FIBER} fill="none" stroke={LIME} strokeWidth="3.5" strokeLinecap="round" />
-      <path className="hero-flow" d={FIBER} fill="none" stroke="var(--fiber-pulse)" strokeWidth="5" strokeLinecap="round" />
+      <path className="hero-flow" d={FIBER} fill="none" stroke="var(--fiber-pulse)" strokeWidth="7" strokeLinecap="round" />
       <g fill={LIME}>
         {FIBER_NODES.map((cx) => (
           <circle key={cx} cx={cx} cy="614" r="4" />
@@ -199,11 +199,26 @@ export function HeroLandscape({
         <path d="M80 742 C220 732 340 730 470 738" />
       </g>
       {/* Arboleda de las fincas, lejos de la línea de fibra. */}
+      <Tree x={22} y={672} s={0.9} />
+      <Tree x={44} y={668} s={1.2} />
       <Tree x={96} y={662} s={1.1} />
       <Tree x={124} y={666} s={1.35} />
       <Tree x={152} y={664} s={0.95} />
+      <Tree x={214} y={658} s={0.85} />
+      <Tree x={236} y={660} s={1.05} />
       <Tree x={316} y={656} s={1.15} />
       <Tree x={340} y={658} s={0.9} />
+      <Tree x={398} y={662} s={1} />
+
+      {/* Árboles en la colina de la antena. */}
+      <Tree x={1100} y={590} s={0.75} />
+      <Tree x={1162} y={552} s={0.8} />
+      <Tree x={1180} y={538} s={0.65} />
+      <Tree x={1214} y={504} s={0.7} />
+      <Tree x={1296} y={492} s={0.7} />
+      <Tree x={1316} y={496} s={0.55} />
+      <Tree x={1386} y={524} s={0.75} />
+      <Tree x={1436} y={544} s={0.7} />
 
       {/* Haces de Radio Enlace hacia tres fincas de la colina. */}
       <g stroke={LIME} strokeWidth="2" strokeDasharray="4 6" fill="none" strokeLinecap="round" className="hero-beam">
@@ -285,7 +300,7 @@ export function HeroLandscapeMobile({ className }: { className?: string }) {
         d="M0 156 L196 156"
         fill="none"
         stroke="var(--fiber-pulse)"
-        strokeWidth="4.5"
+        strokeWidth="5.5"
         strokeLinecap="round"
       />
       <g fill={LIME}>
@@ -305,6 +320,13 @@ export function HeroLandscapeMobile({ className }: { className?: string }) {
         <path d="M324 28 a30 30 0 0 1 0 32" />
       </g>
 
+      {/* Árboles en la colina de la antena */}
+      <Tree x={226} y={140} s={0.45} />
+      <Tree x={254} y={118} s={0.45} />
+      <Tree x={270} y={104} s={0.4} />
+      <Tree x={336} y={102} s={0.45} />
+      <Tree x={372} y={114} s={0.45} />
+
       {/* Primer plano y fincas */}
       <path d="M0 186 C80 176 160 182 240 190 C300 196 350 186 390 178 L390 230 L0 230 Z" fill="url(#hm-near)" />
       <g stroke={LIME} strokeWidth="1.6" strokeDasharray="3 5" fill="none" strokeLinecap="round" className="hero-beam">
@@ -315,8 +337,11 @@ export function HeroLandscapeMobile({ className }: { className?: string }) {
         <path d="M224 200 l14 -12 l14 12 v16 h-28 Z" />
         <path d="M348 190 l14 -12 l14 12 v16 h-28 Z" />
       </g>
+      <Tree x={14} y={210} s={0.6} />
       <Tree x={30} y={206} s={0.7} />
       <Tree x={46} y={208} s={0.85} />
+      <Tree x={110} y={200} s={0.65} />
+      <Tree x={126} y={202} s={0.75} />
       <Tree x={300} y={210} s={0.6} />
       <g fontFamily="var(--font-sans)" fontSize="11" fontWeight="600">
         <rect x="52" y="64" width="98" height="22" rx="11" fill="var(--tag-bg)" />
