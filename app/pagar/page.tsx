@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { buttonClass, cardClass, Eyebrow, Icon, SectionHead, SrOnly } from "@/components/ui";
 import {
+  COLLECTOR_NIT,
   DAVIVIENDA_HOST,
   DAVIVIENDA_PSE_URL,
   OFFICES,
@@ -21,18 +22,18 @@ import { ICONS } from "@/lib/icons";
 
 export const metadata: Metadata = {
   title: "Paga tu factura",
-  description: "Paga tu factura de iWana con PSE desde cualquier banco, en el portal seguro de Davivienda.",
+  description: "Paga tu factura de iWana con PSE o tarjeta de crédito, en el portal seguro de Davivienda.",
 };
 
 const STEPS = [
   {
-    title: "Ten a mano tu factura",
-    // RESUMEN §7.1: cuando iWana confirme qué datos pide el portal, nombrarlos aquí.
-    text: "El portal te pedirá los datos de tu factura de iWana para encontrar tu pago.",
+    // Flujo del portal confirmado por iWana (RESUMEN §7.1).
+    title: "Consulta con tu cédula",
+    text: "En el portal escribe el número de identificación del titular del servicio y toca «Consultar». Aparece tu factura pendiente.",
   },
   {
-    title: "Elige tu banco en PSE",
-    text: "Toca «Ir a pagar con PSE», elige tu banco y sigue los pasos que te muestra.",
+    title: "Elige cómo pagar",
+    text: "Marca la factura y toca «Pagar». Elige PSE o tarjeta de crédito, completa los datos, acepta los términos y confirma.",
   },
   {
     title: "Guarda el comprobante",
@@ -115,8 +116,9 @@ export default function PagarPage() {
                 ¿Ya pagaste y no se refleja?
               </h2>
               <p className="mt-2.5 max-w-[600px] text-[1.0625rem] text-iwana-primary-200">
-                Escríbenos por WhatsApp y envíanos el comprobante de tu banco. Te ayudamos a revisarlo. No envíes
-                claves ni datos de tarjeta por el chat.
+                Los pagos en línea se reflejan en el transcurso del día. Si ya pasó ese tiempo, escríbenos por
+                WhatsApp y envíanos el comprobante de tu banco. Te ayudamos a revisarlo. No envíes claves ni datos de
+                tarjeta por el chat.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -154,11 +156,11 @@ function PayHero() {
               Paga tu factura <em className="not-italic text-accent-text">en línea.</em>
             </h1>
             <p className="mt-3.5 max-w-[620px] text-[1.0625rem] text-muted">
-              Paga con PSE desde cualquier banco, sin ir a la oficina.
+              Paga con PSE o tarjeta de crédito, sin ir a la oficina.
             </p>
             <div className="mt-[30px] flex flex-col items-start gap-3">
               <ExternalLink href={DAVIVIENDA_PSE_URL} className={buttonClass("primary")}>
-                Ir a pagar con PSE
+                Ir a pagar en línea
                 <Icon d={ICONS.external} className="size-4" />
                 <SrOnly>(se abre en otra pestaña)</SrOnly>
               </ExternalLink>
@@ -252,7 +254,11 @@ function SafePayment() {
   const items = [
     <>
       <strong className="font-semibold">iWana no ve ni guarda tus datos bancarios.</strong> El pago lo procesa
-      Davivienda a través de PSE.
+      Davivienda.
+    </>,
+    <>
+      <strong className="font-semibold">En el portal verás el comercio IWANA SAS</strong> (NIT {COLLECTOR_NIT}): es
+      la empresa con la que recaudamos tus pagos.
     </>,
     <>
       <strong className="font-semibold">Revisa la dirección</strong> antes de pagar: debe decir{" "}

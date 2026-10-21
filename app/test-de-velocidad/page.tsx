@@ -119,10 +119,10 @@ export default function TestPage() {
               ))}
             </div>
             <div className={`${cardClass} mt-6 flex flex-wrap items-center justify-between gap-4 px-7 py-6`}>
-              {/* RESUMEN §7.4: falta confirmar que la velocidad se entrega por escrito. */}
+              {/* RESUMEN §3, decisión 6: la velocidad va en el contrato que se entrega en la visita. */}
               <p className="max-w-[720px]">
-                <strong className="font-bold">Compara con tu plan.</strong> Revisa tu resultado contra la velocidad que
-                te confirmamos por escrito en la visita de viabilidad.
+                <strong className="font-bold">Compara con tu plan.</strong> Revisa tu resultado contra la velocidad
+                contratada que aparece en tu contrato, el que recibes en la visita de viabilidad.
               </p>
               <ExternalLink href={waLink("plan")} className={buttonClass("ghost")}>
                 ¿No la tienes? Pregúntanos

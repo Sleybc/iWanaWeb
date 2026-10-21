@@ -30,7 +30,7 @@ export function Header({ current }: { current?: string }) {
       <div className="wrap relative">
         <div className="flex min-h-[72px] items-center justify-between gap-4">
           <Brand />
-          <nav aria-label="Principal" className="hidden gap-[30px] min-[960px]:flex">
+          <nav aria-label="Principal" className="hidden gap-[30px] min-[1080px]:flex">
             {SUBPAGE_NAV.map((item) => {
               const cur = item.key === current;
               return (
@@ -38,7 +38,7 @@ export function Header({ current }: { current?: string }) {
                   key={item.href}
                   href={item.href}
                   aria-current={cur ? "page" : undefined}
-                  className={`text-sm font-semibold no-underline hover:text-text ${
+                  className={`whitespace-nowrap text-sm font-semibold no-underline hover:text-text ${
                     cur ? "text-text underline decoration-accent decoration-2 underline-offset-8" : "text-muted"
                   }`}
                 >
@@ -49,7 +49,7 @@ export function Header({ current }: { current?: string }) {
           </nav>
           <div className="flex items-center gap-2">
             <ThemeSwitcher />
-            <div className="hidden min-[960px]:inline-flex">{cta}</div>
+            <div className="hidden min-[1080px]:inline-flex">{cta}</div>
             <MobileMenu items={SUBPAGE_NAV} current={current} cta={cta} />
           </div>
         </div>

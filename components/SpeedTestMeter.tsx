@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SPEEDTEST_URL } from "@/lib/constants";
+import { ROUTES, SPEEDTEST_URL } from "@/lib/constants";
 import { ICONS } from "@/lib/icons";
 import { ExternalLink } from "./ExternalLink";
 import { buttonClass, cardClass, Icon } from "./ui";
@@ -45,8 +46,12 @@ export function SpeedTestMeter() {
           <Gauge />
           <h2 className={titleClass}>¿Listo para medir?</h2>
           <p className={textClass}>
-            La medición la hace Ookla Speedtest. Al iniciar se carga su medidor y recibe la dirección de tu conexión
-            para hacer la prueba.
+            La medición la hace Ookla Speedtest, un servicio externo. Al iniciar se carga su medidor y Ookla recibe la
+            dirección IP de tu conexión para hacer la prueba.{" "}
+            <Link href={`${ROUTES.privacidad}#web`} className="font-semibold text-accent-text">
+              Más información
+            </Link>
+            .
           </p>
           <button type="button" onClick={start} className={`${buttonClass("primary")} mt-[22px]`}>
             <Icon d={ICONS.play} className="size-4" />

@@ -17,7 +17,7 @@ export function MobileMenu({ items, current, cta }: { items: NavItem[]; current?
         aria-controls="menu-movil"
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
         onClick={() => setOpen(!open)}
-        className="grid size-11 cursor-pointer place-items-center rounded-pill border-0 bg-transparent text-text hover:bg-icon-hover min-[960px]:hidden"
+        className="grid size-11 cursor-pointer place-items-center rounded-pill border-0 bg-transparent text-text hover:bg-icon-hover min-[1080px]:hidden"
       >
         <Icon d={open ? ICONS.close : ICONS.menu} />
       </button>
@@ -25,7 +25,7 @@ export function MobileMenu({ items, current, cta }: { items: NavItem[]; current?
         <nav
           id="menu-movil"
           aria-label="Menú móvil"
-          className="absolute inset-x-0 top-full flex flex-col border-y border-line bg-bg px-5 pt-2 pb-5 md:px-10 min-[960px]:hidden"
+          className="absolute inset-x-0 top-full flex flex-col border-y border-line bg-bg px-5 pt-2 pb-5 md:px-10 min-[1080px]:hidden"
         >
           {items.map((item) => (
             <Link

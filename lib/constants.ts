@@ -4,6 +4,8 @@
 /** Portal PSE de Davivienda, copiado tal cual (con el %20). */
 export const DAVIVIENDA_PSE_URL = "https://portalpagos.davivienda.com/#/comercio/15730/%20IWANA%20SAS";
 export const DAVIVIENDA_HOST = "portalpagos.davivienda.com";
+/** Comercio que recauda en el portal: iWana S.A.S. (RESUMEN §4), distinto de Iwana Network S.A.S. */
+export const COLLECTOR_NIT = "901.870.583-2";
 
 /** Medidor de Ookla; se carga solo al hacer clic (RESUMEN §3, decisión 11). */
 export const SPEEDTEST_URL = "https://iwn.speedtestcustom.com/";
