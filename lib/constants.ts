@@ -172,6 +172,19 @@ export const INTEREST_LINKS = [
   { label: "Te protejo", href: "https://teprotejocolombia.org/" },
 ] as const;
 
+/**
+ * Accesos del equipo de iWana (página /corporativo/, sin enlace en el menú y
+ * fuera de los buscadores). Tomados de iwana.co/index.php/corporativo/ el
+ * 2026-10-21. Cada portal tiene su propio inicio de sesión: aquí solo hay enlaces.
+ */
+export const INTERNAL_PORTALS = [
+  { name: "Siigo", description: "Contabilidad y facturación electrónica", href: "https://siigonube.siigo.com/" },
+  { name: "WispHub", description: "Gestión de clientes y del servicio", href: "https://wisphub.io/" },
+  { name: "Correo", description: "Correo corporativo (Outlook)", href: "https://outlook.office.com/mail/" },
+  { name: "UISP", description: "Red de Radio Enlace (Ubiquiti)", href: "https://190.0.241.109/" },
+  { name: "AdminOLT", description: "Red de Fibra Óptica (OLT)", href: "https://iwananetwork.adminolt.com/accounts/login/" },
+] as const;
+
 /** Rutas del sitio. Los slugs los fija la implementación; el lienzo solo enlaza archivos. */
 export const ROUTES = {
   inicio: "/",
@@ -180,4 +193,5 @@ export const ROUTES = {
   contacto: "/contacto/",
   empresa: "/empresa/",
   privacidad: "/privacidad/",
+  corporativo: "/corporativo/",
 } as const;
