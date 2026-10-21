@@ -32,6 +32,8 @@ export const WA_TEXT = {
   factura: "Hola, tengo una pregunta sobre mi factura.",
   viabilidad: "Hola, quiero saber si iWana llega a mi zona.",
   vereda: "Hola, quiero saber si iWana llega a mi vereda.",
+  info: "Hola, quiero información sobre el internet de iWana.",
+  soporte: "Hola, soy cliente de iWana y necesito soporte con mi servicio.",
 } as const;
 
 /**
@@ -39,7 +41,11 @@ export const WA_TEXT = {
  * WA_TEXT, para que nunca viajen datos personales (RESUMEN §3, decisión 13).
  */
 export function waLink(motivo: keyof typeof WA_TEXT): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_TEXT[motivo])}`;
+  return waUrl(WA_TEXT[motivo]);
+}
+
+function waUrl(text: string): string {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
 
 export type OfficeHours = {
@@ -116,6 +122,36 @@ export const COVERAGE = {
   municipios: ["El Colegio", "Tena", "San Antonio del Tequendama"],
   rurales: ["La Mesa", "Anapoima", "Viotá"],
 } as const;
+
+export type TownName = (typeof COVERAGE.municipios)[number] | (typeof COVERAGE.rurales)[number];
+
+/** WhatsApp para confirmar cobertura en un municipio: texto fijo por municipio, sin datos personales. */
+export function waTownLink(town: TownName): string {
+  const full = (COVERAGE.municipios as readonly string[]).includes(town);
+  return waUrl(
+    full
+      ? `Hola, quiero confirmar la cobertura de iWana en ${town}.`
+      : `Hola, quiero confirmar si iWana llega a mi vereda en ${town}.`,
+  );
+}
+
+/**
+ * Planes por perfil de uso, sin velocidad (RESUMEN §3, decisiones 6 y 8).
+ * Todos incluyen internet ilimitado, zona Wi-Fi, conexión segura, un punto
+ * cableado y subida igual a la mitad de la bajada.
+ */
+export const PLANS = [
+  { name: "Plan Básico", price: "$55.000", title: "Lo esencial" },
+  { name: "Plan Básico +", price: "$65.000", title: "Un paso más" },
+  { name: "Plan Medio", price: "$79.000", title: "Para toda la familia", popular: true },
+  { name: "Plan Alto", price: "$100.000", title: "Hogares muy conectados y negocios" },
+] as const;
+
+export type PlanName = (typeof PLANS)[number]["name"];
+
+export function waPlanLink(plan: PlanName): string {
+  return waUrl(`Hola, quiero el ${plan}.`);
+}
 
 export const INTEREST_LINKS = [
   {
