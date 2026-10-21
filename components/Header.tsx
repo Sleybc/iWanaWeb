@@ -8,19 +8,26 @@ import { buttonClass } from "./ui";
 
 export type NavItem = { key: string; label: string; href: string };
 
-// Navegación de las páginas internas del lienzo. En el lienzo, Planes y
-// Cobertura enlazan a Main.dc.html; aquí van a su sección de la portada.
+// Navegación de las páginas internas, en la versión de Contacto, Empresa y
+// Privacidad del lienzo (la más reciente). Planes enlaza a su sección de la portada.
 const SUBPAGE_NAV: NavItem[] = [
   { key: "inicio", label: "Inicio", href: ROUTES.inicio },
   { key: "planes", label: "Planes", href: "/#planes" },
-  { key: "cobertura", label: "Cobertura", href: "/#cobertura" },
   { key: "pagar", label: "Pagar factura", href: ROUTES.pagar },
   { key: "test", label: "Test de velocidad", href: ROUTES.test },
+  { key: "contacto", label: "Contacto", href: ROUTES.contacto },
+];
+
+// El menú móvil del lienzo añade «Nuestra empresa» antes de Contacto.
+const MOBILE_NAV: NavItem[] = [
+  ...SUBPAGE_NAV.slice(0, 4),
+  { key: "empresa", label: "Nuestra empresa", href: ROUTES.empresa },
+  SUBPAGE_NAV[4],
 ];
 
 export function Header({ current }: { current?: string }) {
   const cta = (
-    <ExternalLink href={waLink("general")} className={buttonClass("primary")}>
+    <ExternalLink href={waLink("contratar")} className={buttonClass("primary")}>
       Solicitar servicio
     </ExternalLink>
   );
@@ -50,7 +57,7 @@ export function Header({ current }: { current?: string }) {
           <div className="flex items-center gap-2">
             <ThemeSwitcher />
             <div className="hidden min-[1080px]:inline-flex">{cta}</div>
-            <MobileMenu items={SUBPAGE_NAV} current={current} cta={cta} />
+            <MobileMenu items={MOBILE_NAV} current={current} cta={cta} />
           </div>
         </div>
       </div>

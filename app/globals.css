@@ -179,6 +179,7 @@
   --gauge-track: #e8e7f0;
   --card-shadow: var(--shadow-iwana);
   --card-shadow-soft: var(--shadow-iwana-soft);
+  --card-shadow-hi: var(--shadow-iwana-active);
   color-scheme: light;
 }
 
@@ -214,6 +215,7 @@
   --gauge-track: #383838;
   --card-shadow: none;
   --card-shadow-soft: none;
+  --card-shadow-hi: none;
   color-scheme: dark;
 }
 
@@ -250,6 +252,7 @@
     --gauge-track: #383838;
     --card-shadow: none;
     --card-shadow-soft: none;
+    --card-shadow-hi: none;
     color-scheme: dark;
   }
 }
@@ -287,6 +290,7 @@
   --color-warn-line: var(--warn-line);
   --shadow-card: var(--card-shadow);
   --shadow-card-soft: var(--card-shadow-soft);
+  --shadow-card-hi: var(--card-shadow-hi);
 
   /* Regla de radios Firma iWana: píldora / superficie 24 px / control 16 px. */
   --radius-surface: 24px;

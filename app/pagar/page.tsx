@@ -92,12 +92,14 @@ export default function PagarPage() {
                   </h3>
                   <address className="mt-2 flex-1 text-[15px] not-italic text-muted">
                     {office.address}
-                    {office.hours.map((h) => (
-                      <span key={h}>
-                        <br />
-                        {h}
-                      </span>
-                    ))}
+                    {office.hours
+                      .filter((h) => h.times.length > 0)
+                      .map((h) => (
+                        <span key={h.days}>
+                          <br />
+                          {h.days}, {h.times.join(" y ")}
+                        </span>
+                      ))}
                   </address>
                   <ExternalLink href={office.mapUrl} className={`${buttonClass("ghost", "sm")} mt-[18px] self-start`}>
                     Cómo llegar
