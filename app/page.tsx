@@ -5,7 +5,7 @@ import { ExternalLink } from "@/components/ExternalLink";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { CoverageFinder } from "@/components/home/CoverageFinder";
-import { HeroLandscape } from "@/components/home/HeroLandscape";
+import { HeroLandscape, HeroLandscapeMobile } from "@/components/home/HeroLandscape";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { PlanExplorer } from "@/components/home/PlanExplorer";
 import { OfficeCard } from "@/components/OfficeCard";
@@ -105,9 +105,13 @@ export default function Home() {
     <>
       <Header variant="home" />
       <main>
-        <section id="inicio" className="relative overflow-hidden bg-linear-to-b from-[var(--sky-top)] to-[var(--sky-bottom)] to-70% text-hero-text">
-          <HeroLandscape />
-          <div className="wrap relative pt-18 pb-[300px] min-[960px]:pt-24 min-[960px]:pb-[340px]">
+        <section
+          id="inicio"
+          className="relative overflow-hidden bg-linear-to-b from-[var(--sky-top)] to-[var(--sky-bottom)] to-62% text-hero-text xl:h-[760px]"
+        >
+          {/* Escritorio: el paisaje es el fondo de la sección (propuesta A del lienzo). */}
+          <HeroLandscape idPrefix="hl" className="absolute inset-0 hidden size-full xl:block" />
+          <div className="wrap relative pt-12 md:pt-16 xl:pt-24">
             <h1 className="mt-5 max-w-[820px] text-[clamp(2.5rem,1.4rem+4.2vw,4.25rem)] font-bold leading-[1.02] tracking-[-.035em]">
               Internet estable para tu casa, <em className="not-italic text-accent-text">finca y negocio.</em>
             </h1>
@@ -125,11 +129,20 @@ export default function Home() {
               </ExternalLink>
             </div>
           </div>
+          {/* Tableta: la misma escena, recortada al pueblo y la colina, debajo del texto. */}
+          <HeroLandscape
+            idPrefix="ht"
+            viewBox="480 300 960 460"
+            preserveAspectRatio="xMidYMax meet"
+            className="mt-10 hidden w-full md:block xl:hidden"
+          />
+          {/* Celular: composición propia, siempre con la antena y el pueblo a la vista. */}
+          <HeroLandscapeMobile className="mt-7 block w-full md:hidden" />
         </section>
 
         <div className="wrap">
           <div
-            className={`${cardClass} relative z-[2] -mt-16 grid overflow-hidden shadow-card-soft min-[640px]:grid-cols-2 min-[1100px]:grid-cols-4`}
+            className={`${cardClass} relative z-[2] mt-3 grid md:-mt-16 overflow-hidden shadow-card-soft min-[640px]:grid-cols-2 min-[1100px]:grid-cols-4`}
           >
             {FACTS.map((f) => (
               <div

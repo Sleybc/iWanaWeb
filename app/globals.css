@@ -181,22 +181,30 @@
   --sel-bg: rgb(23 22 58 / 5%);
   --sel-text: #17163a;
   --control: #d1d5db;
-  --sky-top: #e4efc6;
+  --sky-top: #e6efd0;
   --sky-bottom: #f8faf5;
-  --m1: #e8e7f0;
-  --m2: #d1cfe1;
-  --m3: #7b75ab;
-  --m4: #17163a;
+  --m1a: #ecebf3;
+  --m1b: #f4f3f8;
+  --m2a: #d6d3e6;
+  --m2b: #e4e2ee;
+  --m3a: #a9a4cc;
+  --m3b: #bdb9d8;
+  --m4a: #5a5190;
+  --m4b: #6e66a3;
   --hero-text: #17163a;
   --hero-muted: #3d3461;
-  --orb: #a5c330;
+  --sun: #fff1bf;
+  --sun-halo: rgb(255 241 191 / 45%);
   --stars: 0;
   --house: #ffffff;
   --bld: #ffffff;
-  --win: rgb(23 22 58 / 22%);
-  --tag-bg: #ffffff;
+  --bld-sh: #e3e1ee;
+  --roof: #d1cfe1;
+  --win: rgb(23 22 58 / 24%);
+  --tag-bg: rgb(255 255 255 / 92%);
   --tag-text: #17163a;
   --tree: #6a7a1c;
+  --tree-sh: #55621c;
   --map-bg: #f8faf5;
   --contour: rgb(23 22 58 / 10%);
   --card-shadow: var(--shadow-iwana);
@@ -239,22 +247,30 @@
   --sel-bg: #2a2a2a;
   --sel-text: #f0f0f0;
   --control: #383838;
-  --sky-top: #0f0e24;
-  --sky-bottom: #17163a;
-  --m1: #262350;
-  --m2: #1e1c44;
-  --m3: #15142f;
-  --m4: #0b0a1a;
+  --sky-top: #0e0d22;
+  --sky-bottom: #1e1c44;
+  --m1a: #2b2858;
+  --m1b: #24224c;
+  --m2a: #232049;
+  --m2b: #1d1b3f;
+  --m3a: #1a1838;
+  --m3b: #16152f;
+  --m4a: #100f26;
+  --m4b: #0c0b1d;
   --hero-text: #f0f0f0;
   --hero-muted: #d1cfe1;
-  --orb: #f0f0f0;
+  --sun: #f0f0f0;
+  --sun-halo: rgb(240 240 240 / 16%);
   --stars: 1;
-  --house: #fde68a;
-  --bld: #2a2758;
+  --house: #3a3670;
+  --bld: #2d2a5c;
+  --bld-sh: #23204a;
+  --roof: #3a3670;
   --win: #fde68a;
-  --tag-bg: #222222;
+  --tag-bg: rgb(34 34 34 / 90%);
   --tag-text: #f0f0f0;
   --tree: #3b4a12;
+  --tree-sh: #2e3a0e;
   --map-bg: #2a2a2a;
   --contour: rgb(240 240 240 / 8%);
   --card-shadow: none;
@@ -298,22 +314,30 @@
     --sel-bg: #2a2a2a;
     --sel-text: #f0f0f0;
     --control: #383838;
-    --sky-top: #0f0e24;
-    --sky-bottom: #17163a;
-    --m1: #262350;
-    --m2: #1e1c44;
-    --m3: #15142f;
-    --m4: #0b0a1a;
+    --sky-top: #0e0d22;
+    --sky-bottom: #1e1c44;
+    --m1a: #2b2858;
+    --m1b: #24224c;
+    --m2a: #232049;
+    --m2b: #1d1b3f;
+    --m3a: #1a1838;
+    --m3b: #16152f;
+    --m4a: #100f26;
+    --m4b: #0c0b1d;
     --hero-text: #f0f0f0;
     --hero-muted: #d1cfe1;
-    --orb: #f0f0f0;
+    --sun: #f0f0f0;
+    --sun-halo: rgb(240 240 240 / 16%);
     --stars: 1;
-    --house: #fde68a;
-    --bld: #2a2758;
+    --house: #3a3670;
+    --bld: #2d2a5c;
+    --bld-sh: #23204a;
+    --roof: #3a3670;
     --win: #fde68a;
-    --tag-bg: #222222;
+    --tag-bg: rgb(34 34 34 / 90%);
     --tag-text: #f0f0f0;
     --tree: #3b4a12;
+    --tree-sh: #2e3a0e;
     --map-bg: #2a2a2a;
     --contour: rgb(240 240 240 / 8%);
     --card-shadow: none;
@@ -464,4 +488,44 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+}
+
+/* Portada: pulso de la fibra y de los haces de Radio Enlace. */
+@layer components {
+  .hero-flow {
+    stroke-dasharray: 22 560;
+    animation: hero-flow 4.5s linear infinite;
+  }
+  .hero-flow-sm {
+    stroke-dasharray: 14 300;
+    animation: hero-flow-sm 3.5s linear infinite;
+  }
+  .hero-beam {
+    animation: hero-beam 1.6s linear infinite;
+  }
+}
+@keyframes hero-flow-sm {
+  to {
+    stroke-dashoffset: -314;
+  }
+}
+@keyframes hero-flow {
+  to {
+    stroke-dashoffset: -582;
+  }
+}
+@keyframes hero-beam {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-flow,
+  .hero-flow-sm {
+    animation: none;
+    opacity: 0;
+  }
+  .hero-beam {
+    animation: none;
+  }
 }

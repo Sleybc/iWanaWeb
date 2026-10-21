@@ -1,171 +1,322 @@
-// Paisaje de la portada (lienzo Main.dc.html): de día en claro y de noche en
-// oscuro, solo con tokens. Colina con antena de Radio Enlace que conecta tres
-// casas (zona rural) y
-// casco urbano con la red de fibra por la calle.
-const STARS = [
-  [160, 90, 1.6],
-  [420, 60, 1.2],
-  [610, 130, 1.4],
-  [880, 70, 1.2],
-  [1010, 150, 1.6],
-  [1320, 90, 1.3],
-  [760, 40, 1],
-  [1240, 210, 1.1],
-  [300, 180, 1],
-];
-
+// Paisaje de la portada, propuesta A «Paisaje refinado» (lienzo Banner-A.dc.html
+// y Banner-A-movil.dc.html). Día en claro y noche en oscuro, solo con tokens.
+// El pueblo recibe la Fibra Óptica por la calle; la antena de Radio Enlace de
+// la colina conecta tres fincas. El pulso y los haces se detienen con
+// prefers-reduced-motion (globals.css).
 const LIME = "var(--color-iwana-secondary)";
 
-export function HeroLandscape() {
+const STARS = [
+  [980, 70, 1.4],
+  [1110, 140, 1.1],
+  [1200, 60, 1.6],
+  [1330, 120, 1.2],
+  [1400, 220, 1],
+  [860, 180, 1],
+  [1270, 250, 1.1],
+  [940, 300, 0.9],
+];
+
+const FIBER = "M0 712 C180 700 360 690 470 660 C510 648 530 630 540 614 L1085 614";
+const FIBER_NODES = [568, 613, 690, 769, 852, 933, 1008];
+
+function Tag({ x, y, width, label }: { x: number; y: number; width: number; label: string }) {
   return (
-    <svg
-      className="absolute inset-0 size-full"
-      viewBox="0 0 1440 760"
-      preserveAspectRatio="xMidYMax slice"
-      aria-hidden="true"
-    >
+    <g fontFamily="var(--font-sans)" fontSize="13" fontWeight="600">
+      <rect x={x} y={y} width={width} height="30" rx="15" fill="var(--tag-bg)" />
+      <circle cx={x + 18} cy={y + 15} r="5" fill={LIME} />
+      <text x={x + 30} y={y + 20} fill="var(--tag-text)">
+        {label}
+      </text>
+    </g>
+  );
+}
+
+/**
+ * Escena completa (viewBox 1440 × 760). `idPrefix` evita ids repetidos cuando
+ * la escena aparece dos veces en la página (fondo en escritorio y recorte en tableta).
+ */
+export function HeroLandscape({
+  idPrefix,
+  viewBox = "0 0 1440 760",
+  preserveAspectRatio = "xMaxYMax slice",
+  className,
+}: {
+  idPrefix: string;
+  viewBox?: string;
+  preserveAspectRatio?: string;
+  className?: string;
+}) {
+  const id = (name: string) => `${idPrefix}-${name}`;
+  const url = (name: string) => `url(#${id(name)})`;
+
+  return (
+    <svg className={className} viewBox={viewBox} preserveAspectRatio={preserveAspectRatio} aria-hidden="true">
+      <defs>
+        <linearGradient id={id("far")} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m1a)" />
+          <stop offset="1" stopColor="var(--m1b)" />
+        </linearGradient>
+        <linearGradient id={id("mid")} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m2a)" />
+          <stop offset="1" stopColor="var(--m2b)" />
+        </linearGradient>
+        <linearGradient id={id("val")} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m3b)" />
+          <stop offset="1" stopColor="var(--m3a)" />
+        </linearGradient>
+        <linearGradient id={id("near")} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m4b)" />
+          <stop offset="1" stopColor="var(--m4a)" />
+        </linearGradient>
+        <radialGradient id={id("halo")}>
+          <stop offset="0" stopColor="var(--sun-halo)" />
+          <stop offset="1" stopColor="var(--sun-halo)" stopOpacity="0" />
+        </radialGradient>
+        <pattern id={id("win")} width="10" height="13" patternUnits="userSpaceOnUse">
+          <rect x="2.5" y="3" width="5" height="6" rx="1" fill="var(--win)" />
+        </pattern>
+      </defs>
+
       <g fill="#f0f0f0" className="opacity-(--stars)">
         {STARS.map(([cx, cy, r]) => (
           <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} />
         ))}
       </g>
-      <defs>
-        <pattern id="win" width="12" height="14" patternUnits="userSpaceOnUse">
-          <rect x="3" y="4" width="5" height="6" rx="1" fill="var(--win)" />
-        </pattern>
-      </defs>
-      <circle cx="1170" cy="190" r="58" fill="var(--orb)" opacity="0.9" />
+      {/* Sol (claro) o luna (oscuro): pequeño, bajo y lejos del titular. */}
+      <circle cx="1040" cy="316" r="78" fill={url("halo")} />
+      <circle cx="1040" cy="316" r="30" fill="var(--sun)" />
+
+      {/* Capas con perspectiva atmosférica. */}
       <path
-        d="M0 470 L110 420 L230 448 L360 380 L500 430 L640 360 L790 418 L940 350 L1080 405 L1230 352 L1360 398 L1440 380 L1440 760 L0 760 Z"
-        fill="var(--m1)"
+        d="M0 430 L120 392 L250 418 L390 360 L530 404 L680 346 L820 396 L960 352 L1100 392 L1230 340 L1350 380 L1440 362 L1440 760 L0 760 Z"
+        fill={url("far")}
       />
       <path
-        d="M0 540 C170 480 300 512 430 482 C570 450 690 505 830 474 C990 438 1120 486 1260 455 C1350 436 1405 448 1440 444 L1440 760 L0 760 Z"
-        fill="var(--m2)"
+        d="M0 500 C180 452 320 486 470 462 C620 438 760 488 910 462 C1060 436 1180 474 1300 452 C1380 438 1420 446 1440 442 L1440 760 L0 760 Z"
+        fill={url("mid")}
       />
       <path
-        d="M0 612 C160 590 300 560 420 548 C500 540 560 560 640 586 L1180 586 C1270 586 1360 566 1440 556 L1440 760 L0 760 Z"
-        fill="var(--m3)"
+        d="M0 610 C140 596 300 584 440 590 C500 592 522 600 540 606 L1085 606 C1150 560 1205 486 1260 482 C1320 478 1380 520 1440 540 L1440 760 L0 760 Z"
+        fill={url("val")}
       />
 
+      {/* Pueblo: una sola escala, cada edificio con su lado en sombra. */}
       <g>
-        {/* Edificios residenciales y comerciales al fondo del casco urbano. */}
-        <g fill="var(--bld)">
-          <rect x="664" y="520" width="36" height="66" rx="2" />
-          <rect x="744" y="486" width="36" height="100" rx="2" />
-          <rect x="846" y="496" width="42" height="90" rx="2" />
-          <rect x="976" y="510" width="38" height="76" rx="2" />
-          <rect x="1104" y="498" width="40" height="88" rx="2" />
-        </g>
-        <g fill="url(#win)">
-          <rect x="670" y="528" width="24" height="46" />
-          <rect x="750" y="494" width="24" height="78" />
-          <rect x="852" y="504" width="30" height="68" />
-          <rect x="982" y="518" width="26" height="54" />
-          <rect x="1110" y="506" width="28" height="68" />
-        </g>
-        {/* Instituciones a escala de barrio, integradas con las viviendas. */}
-        <g transform="translate(224 164.08) scale(.72)">
-        {/* Hospital: alas con ventanas, entrada y símbolo de salud. */}
-        <g>
-          <rect x="660" y="524" width="144" height="62" rx="2" fill="var(--bld)" />
-          <rect x="698" y="492" width="68" height="94" rx="2" fill="var(--bld)" />
-          <rect x="668" y="534" width="24" height="40" fill="url(#win)" />
-          <rect x="772" y="534" width="24" height="40" fill="url(#win)" />
-          <path d="M727 501 h10 v9 h9 v10 h-9 v9 h-10 v-9 h-9 v-10 h9 Z" fill="var(--win)" />
-          <path d="M719 586 v-26 h26 v26" fill="var(--win)" />
-          <path d="M732 560 v26" stroke="var(--bld)" strokeWidth="2" />
-        </g>
-        {/* Alcaldía: frontón, columnas y bandera del municipio. */}
-        <g>
-          <rect x="830" y="518" width="130" height="68" rx="2" fill="var(--bld)" />
-          <path d="M820 518 l75 -42 l75 42 Z" fill="var(--bld)" />
-          <path d="M895 476 v-25" stroke="var(--bld)" strokeWidth="2" />
-          <path d="M896 451 h25 l-5 7 l5 7 h-25 Z" fill={LIME} />
-          <path d="M846 531 v43 M874 531 v43 M916 531 v43 M944 531 v43" stroke="var(--win)" strokeWidth="7" />
-          <rect x="885" y="550" width="20" height="30" fill="var(--win)" />
-          <path d="M824 580 h142 M820 586 h150" stroke="var(--bld)" strokeWidth="5" />
-        </g>
-        {/* Colegio: pabellones bajos, acceso central y libro abierto. */}
-        <g>
-          <rect x="986" y="530" width="154" height="56" rx="2" fill="var(--bld)" />
-          <path d="M978 530 h170 l-12 -10 h-146 Z" fill="var(--bld)" />
-          <rect x="1039" y="502" width="48" height="84" rx="2" fill="var(--bld)" />
-          <path d="M1049 511 q7 -3 14 1 q7 -4 14 -1 v13 q-7 -3 -14 1 q-7 -4 -14 -1 Z M1063 512 v13" fill="none" stroke="var(--win)" strokeWidth="2" strokeLinejoin="round" />
-          <rect x="994" y="541" width="36" height="30" fill="url(#win)" />
-          <rect x="1096" y="541" width="36" height="30" fill="url(#win)" />
-          <rect x="1053" y="557" width="20" height="29" fill="var(--win)" />
-        </g>
-        </g>
-        {/* Casas, un local y árboles completan la calle conectada por fibra. */}
-        <g fill="var(--bld)">
-          <path d="M610 586 v-25 l20 -18 l20 18 v25 Z" />
-          <path d="M650 586 v-18 l14 -13 l14 13 v18 Z" />
-          <path d="M1058 586 v-28 l20 -18 l20 18 v28 Z" />
-          <path d="M1148 586 v-28 l20 -18 l20 18 v28 Z" />
-          <rect x="1195" y="552" width="42" height="34" rx="2" />
-        </g>
-        <g fill="var(--win)">
-          <rect x="619" y="563" width="8" height="8" rx="1" />
-          <rect x="633" y="571" width="8" height="15" />
-          <rect x="1067" y="561" width="8" height="8" rx="1" />
-          <rect x="1081" y="571" width="8" height="15" />
-          <rect x="1157" y="562" width="8" height="8" rx="1" />
-          <rect x="1171" y="572" width="8" height="14" />
-          <rect x="1200" y="565" width="19" height="14" rx="1" />
-          <rect x="1223" y="565" width="9" height="21" />
-        </g>
-        <path d="M1193 552 h46 l-4 9 h-38 Z" fill={LIME} opacity=".65" />
-        <path d="M1039 574 v12 M1188 570 v16" stroke="var(--bld)" strokeWidth="3" />
-        <g fill="var(--tree)">
-          <circle cx="1039" cy="569" r="9" />
-          <circle cx="1188" cy="566" r="8" />
-        </g>
-      </g>
-      <path d="M610 596 H1440" stroke={LIME} strokeWidth="3" strokeLinecap="round" fill="none" />
+        <path d="M548 606 v-34 l20 -18 l20 18 v34 Z" fill="var(--bld)" />
+        <path d="M576 606 v-34 l-8 -7 v41 Z" fill="var(--bld-sh)" />
+        <rect x="556" y="582" width="8" height="8" rx="1" fill="var(--win)" />
 
-      <g stroke="var(--bld)" strokeWidth="2.5" strokeLinecap="round" fill="none">
-        <path d="M488 546 L500 470 L512 546 M492 522 L508 522 M495 498 L505 498" />
-        <path d="M486 464 a20 20 0 0 0 0 22 M514 464 a20 20 0 0 1 0 22" />
+        <rect x="596" y="518" width="34" height="88" rx="2" fill="var(--bld)" />
+        <rect x="620" y="518" width="10" height="88" fill="var(--bld-sh)" />
+        <rect x="599" y="524" width="20" height="74" fill={url("win")} />
+
+        {/* Hospital */}
+        <rect x="638" y="544" width="104" height="62" rx="2" fill="var(--bld)" />
+        <rect x="670" y="518" width="40" height="88" rx="2" fill="var(--bld)" />
+        <rect x="700" y="518" width="10" height="88" fill="var(--bld-sh)" />
+        <rect x="726" y="544" width="16" height="62" fill="var(--bld-sh)" />
+        <path d="M685 527 h10 v8 h8 v10 h-8 v8 h-10 v-8 h-8 v-10 h8 Z" fill="var(--win)" />
+        <rect x="644" y="552" width="22" height="40" fill={url("win")} />
+        <rect x="714" y="552" width="10" height="40" fill={url("win")} />
+        <path d="M681 606 v-20 h18 v20" fill="var(--win)" />
+
+        <path d="M750 606 v-32 l19 -17 l19 17 v32 Z" fill="var(--bld)" />
+        <path d="M776 606 v-32 l-7 -7 v39 Z" fill="var(--bld-sh)" />
+        <rect x="757" y="583" width="8" height="8" rx="1" fill="var(--win)" />
+
+        {/* Alcaldía */}
+        <rect x="796" y="542" width="112" height="64" rx="2" fill="var(--bld)" />
+        <path d="M788 542 l64 -32 l64 32 Z" fill="var(--roof)" />
+        <path d="M852 510 v-22" stroke="var(--bld)" strokeWidth="2" />
+        <path d="M853 488 h20 l-4 6 l4 6 h-20 Z" fill={LIME} />
+        <path d="M812 554 v40 M834 554 v40 M870 554 v40 M892 554 v40" stroke="var(--bld-sh)" strokeWidth="7" />
+        <rect x="843" y="572" width="18" height="34" fill="var(--win)" />
+
+        <rect x="916" y="510" width="34" height="96" rx="2" fill="var(--bld)" />
+        <rect x="940" y="510" width="10" height="96" fill="var(--bld-sh)" />
+        <rect x="919" y="516" width="20" height="82" fill={url("win")} />
+
+        {/* Colegio */}
+        <rect x="958" y="552" width="100" height="54" rx="2" fill="var(--bld)" />
+        <rect x="990" y="526" width="36" height="80" rx="2" fill="var(--bld)" />
+        <path d="M986 526 h44 l-6 -9 h-32 Z" fill="var(--roof)" />
+        <rect x="1046" y="552" width="12" height="54" fill="var(--bld-sh)" />
+        <path
+          d="M999 536 q4.5 -2 9 .5 q4.5 -2.5 9 -.5 v9 q-4.5 -2 -9 .5 q-4.5 -2.5 -9 -.5 Z"
+          fill="none"
+          stroke="var(--win)"
+          strokeWidth="1.6"
+          strokeLinejoin="round"
+        />
+        <rect x="964" y="560" width="22" height="30" fill={url("win")} />
+        <rect x="1030" y="560" width="14" height="30" fill={url("win")} />
+        <rect x="1000" y="584" width="16" height="22" fill="var(--win)" />
+
+        <path d="M1072 606 v-12" stroke="var(--tree-sh)" strokeWidth="3" />
+        <circle cx="1072" cy="588" r="10" fill="var(--tree)" />
+      </g>
+
+      {/* Fibra: entra desde el campo y recorre la calle. */}
+      <path d={FIBER} fill="none" stroke={LIME} strokeWidth="3" strokeLinecap="round" opacity=".55" />
+      <path className="hero-flow" d={FIBER} fill="none" stroke={LIME} strokeWidth="4" strokeLinecap="round" />
+      <g fill={LIME}>
+        {FIBER_NODES.map((cx) => (
+          <circle key={cx} cx={cx} cy="614" r="4" />
+        ))}
+      </g>
+
+      {/* Antena de Radio Enlace en la colina. */}
+      <g stroke="var(--bld)" strokeWidth="3" strokeLinecap="round" fill="none">
+        <path d="M1246 484 L1260 404 L1274 484 M1251 458 L1269 458 M1255 432 L1265 432" />
+        <path d="M1244 396 a20 20 0 0 0 0 22 M1276 396 a20 20 0 0 1 0 22" />
       </g>
       <g stroke={LIME} strokeWidth="2.5" fill="none" strokeLinecap="round">
-        <path d="M470 452 a40 40 0 0 0 0 44" opacity="0.9" />
-        <path d="M456 440 a60 60 0 0 0 0 68" opacity="0.6" />
-        <path d="M442 428 a80 80 0 0 0 0 92" opacity="0.35" />
+        <path d="M1226 384 a44 44 0 0 0 0 46" />
+        <path d="M1294 384 a44 44 0 0 1 0 46" />
+        <path d="M1210 372 a66 66 0 0 0 0 70" opacity=".55" />
+        <path d="M1310 372 a66 66 0 0 1 0 70" opacity=".55" />
       </g>
 
+      {/* Primer plano: fincas. */}
       <path
-        d="M0 668 C160 648 320 640 480 652 C640 664 780 676 940 672 C1120 667 1290 676 1440 668 L1440 760 L0 760 Z"
-        fill="var(--m4)"
+        d="M0 668 C180 646 360 650 520 662 C700 676 880 684 1060 676 C1200 670 1330 650 1440 646 L1440 760 L0 760 Z"
+        fill={url("near")}
       />
-      <g stroke={LIME} strokeWidth="1.5" fill="none" opacity="0.35" strokeLinecap="round">
-        <path d="M150 700 C260 690 380 690 520 698" />
-        <path d="M160 716 C280 706 400 706 540 714" />
-        <path d="M170 732 C300 722 420 722 560 730" />
-      </g>
-      <path d="M478 482 L260 632 M478 482 L404 636 M478 482 L566 640" stroke={LIME} strokeWidth="1.5" strokeDasharray="3 7" fill="none" />
-      <g fill="var(--house)">
-        <path d="M240 650 l18 -16 l18 16 v18 h-36 Z" />
-        <path d="M386 652 l18 -16 l18 16 v18 h-36 Z" />
-        <path d="M540 658 l18 -16 l18 16 v18 h-36 Z" />
-      </g>
-      <g stroke="var(--house)" strokeWidth="2" strokeLinecap="round">
-        <path d="M268 640 v-10 M263 630 h10 M414 642 v-10 M409 632 h10 M568 648 v-10 M563 638 h10" />
+      <g stroke={LIME} strokeWidth="1.4" fill="none" opacity=".3" strokeLinecap="round">
+        <path d="M60 706 C180 696 300 694 430 702" />
+        <path d="M70 724 C200 714 320 712 450 720" />
+        <path d="M80 742 C220 732 340 730 470 738" />
       </g>
       <g fill="var(--tree)">
-        <circle cx="196" cy="652" r="12" />
-        <circle cx="330" cy="646" r="10" />
-        <circle cx="460" cy="654" r="12" />
+        <circle cx="110" cy="660" r="11" />
+        <circle cx="300" cy="652" r="9" />
+        <circle cx="470" cy="664" r="10" />
       </g>
 
-      <g fontFamily="var(--font-sans)" fontSize="13" fontWeight="700" letterSpacing="1.5" textAnchor="middle">
-        <rect x="226" y="576" width="140" height="30" rx="15" fill="var(--tag-bg)" />
-        <text x="296" y="596" fill="var(--tag-text)">
-          ZONA RURAL
+      {/* Haces de Radio Enlace hacia tres fincas de la colina. */}
+      <g stroke={LIME} strokeWidth="2" strokeDasharray="4 6" fill="none" strokeLinecap="round" className="hero-beam">
+        <path d="M1260 412 L1128 556" />
+        <path d="M1260 412 L1348 516" />
+        <path d="M1260 412 L1418 536" />
+      </g>
+      <g fill="var(--house)">
+        <path d="M1110 570 l18 -16 l18 16 v20 h-36 Z" />
+        <path d="M1330 530 l18 -16 l18 16 v20 h-36 Z" />
+        <path d="M1400 550 l18 -16 l18 16 v20 h-36 Z" />
+      </g>
+      <g stroke="var(--house)" strokeWidth="2" strokeLinecap="round">
+        <path d="M1136 558 v-12 M1131 546 h10 M1356 518 v-12 M1351 506 h10 M1426 538 v-12 M1421 526 h10" />
+      </g>
+
+      {/* Rótulos que explican la escena. */}
+      <Tag x={783} y={452} width={138} label="Fibra Óptica" />
+      <Tag x={1185} y={330} width={150} label="Radio Enlace" />
+    </svg>
+  );
+}
+
+/** Composición propia para celular (viewBox 390 × 230): pueblo con fibra a la izquierda, antena y fincas a la derecha. */
+export function HeroLandscapeMobile({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 390 230" aria-hidden="true">
+      <defs>
+        <linearGradient id="hm-far" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m1a)" />
+          <stop offset="1" stopColor="var(--m1b)" />
+        </linearGradient>
+        <linearGradient id="hm-mid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m3b)" />
+          <stop offset="1" stopColor="var(--m3a)" />
+        </linearGradient>
+        <linearGradient id="hm-near" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--m4b)" />
+          <stop offset="1" stopColor="var(--m4a)" />
+        </linearGradient>
+        <radialGradient id="hm-halo">
+          <stop offset="0" stopColor="var(--sun-halo)" />
+          <stop offset="1" stopColor="var(--sun-halo)" stopOpacity="0" />
+        </radialGradient>
+        <pattern id="hm-win" width="8" height="11" patternUnits="userSpaceOnUse">
+          <rect x="2" y="2.5" width="4" height="5" rx="1" fill="var(--win)" />
+        </pattern>
+      </defs>
+      <g fill="#f0f0f0" className="opacity-(--stars)">
+        <circle cx="60" cy="18" r="1.1" />
+        <circle cx="150" cy="10" r="1.3" />
+        <circle cx="250" cy="22" r="1" />
+        <circle cx="350" cy="12" r="1.2" />
+      </g>
+      <circle cx="205" cy="52" r="34" fill="url(#hm-halo)" />
+      <circle cx="205" cy="52" r="13" fill="var(--sun)" />
+      <path d="M0 78 L50 60 L105 74 L165 46 L225 70 L290 44 L350 64 L390 54 L390 230 L0 230 Z" fill="url(#hm-far)" />
+      <path d="M0 150 L196 150 C240 130 270 92 300 90 C330 88 365 108 390 118 L390 230 L0 230 Z" fill="url(#hm-mid)" />
+
+      {/* Pueblo */}
+      <path d="M14 150 v-24 l14 -12 l14 12 v24 Z" fill="var(--bld)" />
+      <path d="M34 150 v-24 l-6 -5 v29 Z" fill="var(--bld-sh)" />
+      <rect x="48" y="96" width="26" height="54" rx="2" fill="var(--bld)" />
+      <rect x="66" y="96" width="8" height="54" fill="var(--bld-sh)" />
+      <rect x="50" y="100" width="14" height="44" fill="url(#hm-win)" />
+      <rect x="80" y="112" width="62" height="38" rx="2" fill="var(--bld)" />
+      <path d="M74 112 l37 -20 l37 20 Z" fill="var(--roof)" />
+      <path d="M90 120 v24 M102 120 v24 M120 120 v24 M132 120 v24" stroke="var(--bld-sh)" strokeWidth="5" />
+      <rect x="106" y="130" width="10" height="20" fill="var(--win)" />
+      <rect x="148" y="104" width="40" height="46" rx="2" fill="var(--bld)" />
+      <rect x="178" y="104" width="10" height="46" fill="var(--bld-sh)" />
+      <path d="M161 110 h6 v5 h5 v6 h-5 v5 h-6 v-5 h-5 v-6 h5 Z" fill="var(--win)" />
+      <rect x="151" y="130" width="22" height="14" fill="url(#hm-win)" />
+
+      {/* Fibra */}
+      <path d="M0 156 L196 156" fill="none" stroke={LIME} strokeWidth="2.5" strokeLinecap="round" opacity=".55" />
+      <path
+        className="hero-flow-sm"
+        d="M0 156 L196 156"
+        fill="none"
+        stroke={LIME}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+      <g fill={LIME}>
+        <circle cx="28" cy="156" r="3" />
+        <circle cx="61" cy="156" r="3" />
+        <circle cx="111" cy="156" r="3" />
+        <circle cx="168" cy="156" r="3" />
+      </g>
+
+      {/* Antena */}
+      <g stroke="var(--bld)" strokeWidth="2.5" strokeLinecap="round" fill="none">
+        <path d="M291 92 L300 40 L309 92 M294 74 L306 74 M296 57 L304 57" />
+        <path d="M288 36 a14 14 0 0 0 0 16 M312 36 a14 14 0 0 1 0 16" />
+      </g>
+      <g stroke={LIME} strokeWidth="2" fill="none" strokeLinecap="round">
+        <path d="M276 28 a30 30 0 0 0 0 32" />
+        <path d="M324 28 a30 30 0 0 1 0 32" />
+      </g>
+
+      {/* Primer plano y fincas */}
+      <path d="M0 186 C80 176 160 182 240 190 C300 196 350 186 390 178 L390 230 L0 230 Z" fill="url(#hm-near)" />
+      <g stroke={LIME} strokeWidth="1.6" strokeDasharray="3 5" fill="none" strokeLinecap="round" className="hero-beam">
+        <path d="M300 44 L238 186" />
+        <path d="M300 44 L362 176" />
+      </g>
+      <g fill="var(--house)">
+        <path d="M224 200 l14 -12 l14 12 v16 h-28 Z" />
+        <path d="M348 190 l14 -12 l14 12 v16 h-28 Z" />
+      </g>
+      <g fill="var(--tree)">
+        <circle cx="40" cy="198" r="7" />
+        <circle cx="300" cy="204" r="6" />
+      </g>
+      <g fontFamily="var(--font-sans)" fontSize="11" fontWeight="600">
+        <rect x="52" y="64" width="98" height="22" rx="11" fill="var(--tag-bg)" />
+        <circle cx="65" cy="75" r="4" fill={LIME} />
+        <text x="74" y="79" fill="var(--tag-text)">
+          Fibra Óptica
         </text>
-        <rect x="826" y="420" width="156" height="30" rx="15" fill="var(--tag-bg)" />
-        <text x="904" y="440" fill="var(--tag-text)">
-          ZONA URBANA
+        <rect x="232" y="6" width="98" height="22" rx="11" fill="var(--tag-bg)" />
+        <circle cx="245" cy="17" r="4" fill={LIME} />
+        <text x="254" y="21" fill="var(--tag-text)">
+          Radio Enlace
         </text>
       </g>
     </svg>
