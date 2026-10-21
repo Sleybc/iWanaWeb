@@ -17,6 +17,8 @@ export const PBX_DISPLAY = "(601) 495 4488";
 export const EMAIL = "info@iwana.co";
 export const LEGAL_NAME = "Iwana Network S.A.S.";
 export const NIT = "900.666.794-2";
+/** Alojamiento del sitio (RESUMEN §8.2); se declara en la Política de datos. */
+export const HOSTING_PROVIDER = "Hostinger";
 /** Plan más económico (Básico), RESUMEN §3, decisión 8. */
 export const PRICE_FROM = "$55.000";
 
@@ -89,6 +91,25 @@ export const OFFICES: Office[] = [
     mapUrl: "https://maps.app.goo.gl/hY2PKKsq5CVkTshP7",
   },
 ];
+
+/**
+ * Política de tratamiento de datos (RESUMEN §6). `null` = pendiente: la página
+ * lo muestra como marcador visible hasta que iWana lo complete.
+ */
+export const POLICY = {
+  version: "1",
+  validFrom: "septiembre de 2023",
+  /** Falta el día en la fecha de vigencia del PDF. */
+  validFromDay: null as string | null,
+  /** Nombre del representante legal que firma. */
+  approvedBy: null as string | null,
+  /** Dirección para solicitudes escritas: el PDF dice Carrera 6 # 6-46, distinta de la oficina. */
+  claimsAddress: null as string | null,
+  claimsAddressToConfirm: "Carrera 6 # 6-46, El Colegio",
+  /** PDF firmado en el propio dominio (p. ej. /legal/politica-datos-v1.pdf). */
+  pdfUrl: null as string | null,
+  pdfPages: 15,
+};
 
 /** Cobertura (RESUMEN §4). */
 export const COVERAGE = {

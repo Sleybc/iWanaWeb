@@ -26,7 +26,7 @@ const linkClass = "no-underline hover:underline";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-bg-alt pt-14 pb-7 text-sm">
+    <footer className="border-t border-line bg-bg-alt pt-14 pb-7 text-sm print:hidden">
       <div className="wrap">
         <div className="grid gap-8 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>

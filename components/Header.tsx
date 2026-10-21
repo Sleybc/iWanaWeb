@@ -33,7 +33,7 @@ export function Header({ current }: { current?: string }) {
   );
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-bg">
+    <header className="sticky top-0 z-30 border-b border-line bg-bg print:hidden">
       <div className="wrap relative">
         <div className="flex min-h-[72px] items-center justify-between gap-4">
           <Brand />

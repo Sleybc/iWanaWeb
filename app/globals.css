@@ -257,6 +257,26 @@
   }
 }
 
+/* Impresión (Política de datos): blanco y negro, sin sombras, en cualquier tema. */
+@media print {
+  :root,
+  [data-theme] {
+    --bg: #ffffff;
+    --bg-alt: #ffffff;
+    --card: #ffffff;
+    --card-2: #ffffff;
+    --text: #000000;
+    --muted: #333333;
+    --line: #cccccc;
+    --line-soft: #dddddd;
+    --card-border: #cccccc;
+    --card-shadow: none;
+    --card-shadow-soft: none;
+    --card-shadow-hi: none;
+    color-scheme: light;
+  }
+}
+
 /* Colores y sombras semánticos como utilidades (bg-bg, text-muted, border-line…). */
 @theme inline {
   --color-bg: var(--bg);

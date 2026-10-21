@@ -67,3 +67,12 @@ export function Icon({ d, className = "", children }: { d?: string; className?: 
 export function SrOnly({ children }: { children: ReactNode }) {
   return <span className="sr-only">{children}</span>;
 }
+
+/** Dato pendiente de confirmar por iWana, visible a propósito (CLAUDE.md: nada se inventa). */
+export function Pending({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-block rounded-[6px] bg-warn-bg px-2 text-[.92em] font-semibold text-warn-text">
+      [{children}]
+    </span>
+  );
+}
