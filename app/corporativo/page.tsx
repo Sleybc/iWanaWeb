@@ -27,7 +27,7 @@ const PORTAL_ICONS: Record<(typeof INTERNAL_PORTALS)[number]["name"], string> = 
 export default function CorporativoPage() {
   return (
     <>
-      <Header />
+      <Header current="corporativo" />
       <main>
         <section className="bg-bg-alt pt-10 pb-12">
           <div className="wrap">

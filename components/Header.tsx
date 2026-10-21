@@ -9,6 +9,9 @@ import { buttonClass, Icon } from "./ui";
 
 export type NavItem = { key: string; label: string; href: string };
 
+// Acceso del equipo a /corporativo/: ícono en la cabecera y última opción del menú móvil.
+const STAFF_ITEM: NavItem = { key: "corporativo", label: "Acceso colaboradores", href: ROUTES.corporativo };
+
 // Navegación de las páginas internas, en la versión de Contacto, Empresa y
 // Privacidad del lienzo (la más reciente). Planes enlaza a su sección de la portada.
 const SUBPAGE_NAV: NavItem[] = [
@@ -24,6 +27,7 @@ const MOBILE_NAV: NavItem[] = [
   ...SUBPAGE_NAV.slice(0, 4),
   { key: "empresa", label: "Nuestra empresa", href: ROUTES.empresa },
   SUBPAGE_NAV[4],
+  STAFF_ITEM,
 ];
 
 // Portada: la navegación salta a sus secciones; «Pagar factura» queda destacado.
@@ -42,6 +46,7 @@ const HOME_MOBILE_NAV: NavItem[] = [
   { key: "contacto", label: "Contacto", href: ROUTES.contacto },
   { key: "pagar", label: "Pagar factura", href: ROUTES.pagar },
   { key: "test", label: "Test de velocidad", href: ROUTES.test },
+  STAFF_ITEM,
 ];
 
 export function Header({ current, variant = "page" }: { current?: string; variant?: "page" | "home" }) {
@@ -82,6 +87,17 @@ export function Header({ current, variant = "page" }: { current?: string; varian
             })}
           </nav>
           <div className="flex items-center gap-2">
+            <Link
+              href={ROUTES.corporativo}
+              aria-label="Acceso colaboradores"
+              title="Acceso colaboradores"
+              aria-current={current === "corporativo" ? "page" : undefined}
+              className={`hidden size-11 place-items-center rounded-pill no-underline hover:bg-icon-hover min-[640px]:grid ${
+                current === "corporativo" ? "bg-icon-hover text-text" : "text-muted hover:text-text"
+              }`}
+            >
+              <Icon d={ICONS.lock} />
+            </Link>
             <ThemeSwitcher />
             <div className="hidden min-[1080px]:inline-flex">{cta}</div>
             <MobileMenu items={home ? HOME_MOBILE_NAV : MOBILE_NAV} current={current} cta={cta} />
