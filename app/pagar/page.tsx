@@ -5,8 +5,8 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { buttonClass, cardClass, Eyebrow, Icon, SectionHead, SrOnly } from "@/components/ui";
 import {
-  COLLECTOR_NIT,
   DAVIVIENDA_HOST,
+  NIT,
   DAVIVIENDA_PSE_URL,
   OFFICES,
   PBX_DISPLAY,
@@ -259,8 +259,8 @@ function SafePayment() {
       Davivienda.
     </>,
     <>
-      <strong className="font-semibold">En el portal verás el comercio IWANA SAS</strong> (NIT {COLLECTOR_NIT}): es
-      la empresa con la que recaudamos tus pagos.
+      <strong className="font-semibold">En el portal verás el comercio IWANA SAS</strong> (NIT {NIT}): somos
+      nosotros, la empresa que te presta el servicio.
     </>,
     <>
       <strong className="font-semibold">Revisa la dirección</strong> antes de pagar: debe decir{" "}

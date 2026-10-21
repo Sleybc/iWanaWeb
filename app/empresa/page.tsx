@@ -8,6 +8,7 @@ import { buttonClass, cardClass, Eyebrow, Icon, SectionHead } from "@/components
 import {
   COVERAGE,
   EMAIL,
+  LEGAL_ADDRESS,
   LEGAL_NAME,
   NIT,
   OFFICES,
@@ -225,21 +226,35 @@ export default function EmpresaPage() {
 
         <section className="bg-bg-alt py-14">
           <div className="wrap">
-            <div className="mb-6">
-              <Eyebrow>Datos de la empresa</Eyebrow>
-            </div>
-            <dl className={`${cardClass} m-0 grid px-7 py-2`}>
-              <CompanyRow label="Razón social">{LEGAL_NAME.toUpperCase()}</CompanyRow>
-              <CompanyRow label="NIT">{NIT}</CompanyRow>
-              <CompanyRow label="WhatsApp oficial">{WHATSAPP_DISPLAY}</CompanyRow>
-              <CompanyRow label="Línea PBX">{PBX_DISPLAY}</CompanyRow>
-              <CompanyRow label="Correo">{EMAIL}</CompanyRow>
-              <CompanyRow label="Puntos de atención">
-                <Link href={`${ROUTES.contacto}#puntos`} className="font-semibold text-accent-text">
-                  Ver direcciones y horarios
-                </Link>
-              </CompanyRow>
-            </dl>
+            {/* Identificación del proveedor (Ley 1480 de 2011): visible pero plegada para no recargar la página. */}
+            <details className={`${cardClass} group`}>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-7 py-5 [&::-webkit-details-marker]:hidden">
+                <span>
+                  <Eyebrow>Datos de la empresa</Eyebrow>
+                  <span className="mt-2 block font-semibold">
+                    {LEGAL_NAME} · NIT {NIT}
+                  </span>
+                </span>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent-text">
+                  <span className="group-open:hidden">Ver datos</span>
+                  <span className="hidden group-open:inline">Ocultar</span>
+                  <Icon d="m6 9 6 6 6-6" className="size-4 transition-transform duration-200 group-open:rotate-180" />
+                </span>
+              </summary>
+              <dl className="m-0 grid border-t border-line-soft px-7 py-2">
+                <CompanyRow label="Razón social">{LEGAL_NAME.toUpperCase()}</CompanyRow>
+                <CompanyRow label="NIT">{NIT}</CompanyRow>
+                <CompanyRow label="Dirección">{LEGAL_ADDRESS}</CompanyRow>
+                <CompanyRow label="Correo">{EMAIL}</CompanyRow>
+                <CompanyRow label="WhatsApp oficial">{WHATSAPP_DISPLAY}</CompanyRow>
+                <CompanyRow label="Línea PBX">{PBX_DISPLAY}</CompanyRow>
+                <CompanyRow label="Puntos de atención">
+                  <Link href={`${ROUTES.contacto}#puntos`} className="font-semibold text-accent-text">
+                    Ver direcciones y horarios
+                  </Link>
+                </CompanyRow>
+              </dl>
+            </details>
           </div>
         </section>
 

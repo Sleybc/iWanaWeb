@@ -4,8 +4,6 @@
 /** Portal PSE de Davivienda, copiado tal cual (con el %20). */
 export const DAVIVIENDA_PSE_URL = "https://portalpagos.davivienda.com/#/comercio/15730/%20IWANA%20SAS";
 export const DAVIVIENDA_HOST = "portalpagos.davivienda.com";
-/** Comercio que recauda en el portal: iWana S.A.S. (RESUMEN §4), distinto de Iwana Network S.A.S. */
-export const COLLECTOR_NIT = "901.870.583-2";
 
 /** Medidor de Ookla; se carga solo al hacer clic (RESUMEN §3, decisión 11). */
 export const SPEEDTEST_URL = "https://iwn.speedtestcustom.com/";
@@ -15,8 +13,15 @@ export const WHATSAPP_DISPLAY = "311 284 0141";
 export const PBX_TEL = "+576014954488";
 export const PBX_DISPLAY = "(601) 495 4488";
 export const EMAIL = "info@iwana.co";
-export const LEGAL_NAME = "Iwana Network S.A.S.";
-export const NIT = "900.666.794-2";
+/**
+ * Empresa que presta el servicio de internet y recauda en el portal de
+ * Davivienda (comercio «IWANA SAS»). Iwana Network S.A.S. ya solo atiende
+ * clientes corporativos y no aparece en este sitio (RESUMEN §4, 2026-10-21).
+ */
+export const LEGAL_NAME = "Iwana S.A.S.";
+export const NIT = "901.870.583-2";
+/** Domicilio registrado en el portal de Davivienda («CL 86 C BIS 110 C 18, Bogotá D.C.»). */
+export const LEGAL_ADDRESS = "Calle 86 C Bis # 110 C 18, Bogotá D.C.";
 /** Alojamiento del sitio (RESUMEN §8.2); se declara en la Política de datos. */
 export const HOSTING_PROVIDER = "Hostinger";
 /** Plan más económico (Básico), RESUMEN §3, decisión 8. */
@@ -107,17 +112,18 @@ export const OFFICES: Office[] = [
  */
 export const POLICY = {
   version: "1",
-  validFrom: "septiembre de 2023",
-  /** Falta el día en la fecha de vigencia del PDF. */
-  validFromDay: null as string | null,
-  /** Nombre del representante legal que firma. */
+  /**
+   * Fecha de entrada en vigencia de la política de Iwana S.A.S. El PDF de 2023
+   * es de Iwana Network S.A.S. y no aplica a este sitio (RESUMEN §6).
+   */
+  validFrom: null as string | null,
+  /** Nombre del representante legal de Iwana S.A.S. que firma. */
   approvedBy: null as string | null,
-  /** Dirección para solicitudes escritas: el PDF dice Carrera 6 # 6-46, distinta de la oficina. */
+  /** Dirección para solicitudes escritas (oficina de atención o domicilio). */
   claimsAddress: null as string | null,
-  claimsAddressToConfirm: "Carrera 6 # 6-46, El Colegio",
   /** PDF firmado en el propio dominio (p. ej. /legal/politica-datos-v1.pdf). */
   pdfUrl: null as string | null,
-  pdfPages: 15,
+  pdfPages: null as number | null,
 };
 
 /** Cobertura (RESUMEN §4). */

@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { buttonClass, cardClass, Eyebrow, Icon, Pending } from "@/components/ui";
-import { COLLECTOR_NIT, EMAIL, HOSTING_PROVIDER, LEGAL_NAME, NIT, OFFICES, PBX_DISPLAY, POLICY, ROUTES } from "@/lib/constants";
+import { EMAIL, HOSTING_PROVIDER, LEGAL_ADDRESS, LEGAL_NAME, NIT, PBX_DISPLAY, POLICY, ROUTES } from "@/lib/constants";
 import { ICONS } from "@/lib/icons";
 
 // Fuente: diseno/claude-design/Privacidad.dc.html (Ley 1581 de 2012 y Decreto
@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 };
 
 const RESPONSIBLE = LEGAL_NAME.toUpperCase();
-const office = OFFICES[0];
 
 const TOC = [
   { id: "resumen", label: "En pocas palabras" },
@@ -91,18 +90,7 @@ const linkClass = "font-semibold text-accent-text";
 const checkItem = <Icon d={ICONS.check} className="mt-[5px] size-4 text-accent-text" />;
 
 function ValidFrom() {
-  return (
-    <>
-      {POLICY.validFromDay ? `${POLICY.validFromDay} de ` : null}
-      {POLICY.validFrom}
-      {POLICY.validFromDay ? null : (
-        <>
-          {" "}
-          <Pending>DÍA</Pending>
-        </>
-      )}
-    </>
-  );
+  return <>{POLICY.validFrom ?? <Pending>CONFIRMAR: fecha de vigencia</Pending>}</>;
 }
 
 export default function PrivacidadPage() {
@@ -213,9 +201,7 @@ export default function PrivacidadPage() {
               <dl className={`${cardClass} m-0 mt-[18px] px-6 py-1`}>
                 <Fact label="Razón social">{RESPONSIBLE}</Fact>
                 <Fact label="NIT">{NIT}</Fact>
-                <Fact label="Dirección">
-                  {office.address}, {office.town}, Cundinamarca
-                </Fact>
+                <Fact label="Dirección">{LEGAL_ADDRESS}</Fact>
                 <Fact label="Correo">{EMAIL}</Fact>
                 <Fact label="Teléfono">{PBX_DISPLAY}</Fact>
               </dl>
@@ -259,7 +245,7 @@ export default function PrivacidadPage() {
                   {EMAIL}
                 </a>
                 , llámanos al {PBX_DISPLAY} o envía tu solicitud por escrito a{" "}
-                {POLICY.claimsAddress ?? <Pending>CONFIRMAR: {POLICY.claimsAddressToConfirm}</Pending>}. Indica tu
+                {POLICY.claimsAddress ?? <Pending>CONFIRMAR: dirección para solicitudes escritas</Pending>}. Indica tu
                 nombre, tu documento, lo que pides, tu dirección y los documentos que quieras hacer valer.
               </p>
               <div className="mt-[18px] grid gap-4 min-[700px]:grid-cols-2">
@@ -326,9 +312,8 @@ export default function PrivacidadPage() {
                 Si usas los enlaces a <strong>WhatsApp</strong>, <strong>Google Maps</strong>, al{" "}
                 <strong>portal de pagos de Davivienda</strong> (PSE o tarjeta de crédito) o a los sitios de interés del
                 pie de página (MinTIC, Policía y Te protejo), sales de nuestro sitio y aplican las políticas de esos
-                servicios. Los pagos en línea se recaudan a nombre de <strong>iWana S.A.S.</strong> (NIT{" "}
-                {COLLECTOR_NIT}), la empresa con la que recaudamos, a través de ese portal; ni {LEGAL_NAME} ni iWana
-                S.A.S. ven ni guardan tus datos bancarios. El mensaje de WhatsApp va prellenado sin datos personales. Lo que nos escribas, y tu
+                servicios. Los pagos en línea los recauda {LEGAL_NAME} a través de ese portal; no vemos ni guardamos tus
+                datos bancarios. El mensaje de WhatsApp va prellenado sin datos personales. Lo que nos escribas, y tu
                 número, los tratamos según esta política, solo para atender tu solicitud. Lo mismo aplica si nos llamas
                 o nos escribes un correo.
               </p>
@@ -350,7 +335,7 @@ export default function PrivacidadPage() {
                   <div>
                     <strong className="block font-bold">Política de Privacidad y Tratamiento de Datos Personales</strong>
                     <span className="block text-sm text-muted">
-                      PDF · {POLICY.pdfPages} páginas · firmada por el representante legal{" "}
+                      PDF{POLICY.pdfPages ? ` · ${POLICY.pdfPages} páginas` : null} · firmada por el representante legal{" "}
                       {POLICY.approvedBy ? null : <Pending>PENDIENTE</Pending>}
                     </span>
                   </div>
