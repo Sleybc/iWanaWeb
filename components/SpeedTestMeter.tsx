@@ -69,12 +69,14 @@ export function SpeedTestMeter() {
               {state === "loading" ? "Cargando…" : "Medidor Ookla"}
             </span>
           </div>
-          {/* sandbox mínimo: sin allow-top-navigation, allow-forms ni allow-popups (RESUMEN §5). */}
+          {/* sandbox mínimo: sin allow-top-navigation, allow-forms ni allow-popups (RESUMEN §5).
+              Ookla solo dibuja el medidor si el dominio del referrer está en «Embedded Test URLs» de su
+              panel: no cambiar referrerPolicy a no-referrer. Alto de 650 px, el de su código de inserción. */}
           <iframe key={attempt} sandbox="allow-scripts allow-same-origin" allow="" referrerPolicy="strict-origin-when-cross-origin"
             src={SPEEDTEST_URL}
             title="Medidor de velocidad de internet de Ookla"
             onLoad={() => setState("ready")}
-            className="block h-[520px] w-full border-0"
+            className="block h-[650px] w-full border-0"
           />
         </div>
       ) : null}
