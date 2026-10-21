@@ -87,7 +87,7 @@ const PROCEDURES = [
 ];
 
 const linkClass = "font-semibold text-accent-text";
-const checkItem = <Icon d={ICONS.check} className="mt-[5px] size-4 text-accent-text" />;
+const checkItem = <Icon d={ICONS.check} className="mt-[5px] size-4 shrink-0 text-accent-text" />;
 
 function ValidFrom() {
   return <>{POLICY.validFrom ?? <Pending>CONFIRMAR: fecha de vigencia</Pending>}</>;
@@ -98,7 +98,7 @@ export default function PrivacidadPage() {
     <>
       <Header />
       <main>
-        <section className="bg-bg-alt pt-10 pb-14">
+        <section className="bg-bg-alt pt-6 pb-14 sm:pt-10 lg:pt-12 lg:pb-18">
           <div className="wrap">
             <nav aria-label="Ruta" className="flex items-center gap-2 text-[13px] text-muted print:hidden">
               <Link href={ROUTES.inicio} className="no-underline hover:underline">
@@ -107,13 +107,13 @@ export default function PrivacidadPage() {
               <span aria-hidden="true">/</span>
               <span>Política de datos</span>
             </nav>
-            <div className="mt-7">
+            <div className="mt-6">
               <Eyebrow>Legal</Eyebrow>
             </div>
-            <h1 className="mt-4 max-w-[820px] text-[clamp(2rem,1.3rem+2.8vw,3rem)] font-bold leading-[1.08] tracking-[-.03em]">
+            <h1 className="mt-5 max-w-[1000px] text-[clamp(2.5rem,1.4rem+4.2vw,4.25rem)] font-bold leading-[1.02] tracking-[-.035em] text-balance">
               Política de tratamiento de datos personales
             </h1>
-            <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted">
+            <div className="mt-7 grid gap-3 text-sm text-muted min-[640px]:grid-cols-2 xl:grid-cols-4">
               <MetaChip label="Responsable">{RESPONSIBLE}</MetaChip>
               <MetaChip label="NIT">{NIT}</MetaChip>
               <MetaChip label="Vigente desde">
@@ -126,34 +126,32 @@ export default function PrivacidadPage() {
           </div>
         </section>
 
-        <div className="wrap grid gap-8 pt-12 pb-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-16 print:block">
+        <div className="wrap grid gap-6 py-14 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-12 lg:py-18 print:block">
+          <details className={`${cardClass} group min-w-0 self-start lg:hidden print:hidden`}>
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold [&::-webkit-details-marker]:hidden">
+              En esta página
+              <Icon d="m6 9 6 6 6-6" className="size-4 shrink-0 text-accent-text transition-transform group-open:rotate-180" />
+            </summary>
+            <nav aria-label="En esta página" className="border-t border-line-soft px-2 py-3">
+              <PolicyContents />
+            </nav>
+          </details>
           <nav
             aria-label="En esta página"
-            className={`${cardClass} self-start px-[22px] py-5 lg:sticky lg:top-24 print:hidden`}
+            className={`${cardClass} hidden min-w-0 self-start px-3 py-5 lg:sticky lg:top-24 lg:block print:hidden`}
           >
-            <div className="text-xs font-bold uppercase tracking-[.12em] text-muted">En esta página</div>
-            <ol className="m-0 mt-3 grid list-none gap-0.5 p-0">
-              {TOC.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    className="block rounded-xl px-3 py-2 text-sm font-medium leading-[1.35] no-underline hover:bg-bg-alt"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ol>
+            <div className="mb-3 px-3 text-xs font-bold uppercase tracking-[.12em] text-muted">En esta página</div>
+            <PolicyContents />
           </nav>
 
-          <article className="max-w-[760px]">
+          <article className="min-w-0 max-w-[760px]">
             <section
               id="resumen"
               aria-labelledby="resumen-t"
-              className={`${cardClass} scroll-mt-24 px-8 py-7 shadow-card-soft`}
+              className={`${cardClass} scroll-mt-24 p-5 min-[640px]:p-7`}
             >
               <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                <h2 id="resumen-t" className="text-[1.375rem] font-bold">
+                <h2 id="resumen-t" className="text-[clamp(1.5rem,1.2rem+1vw,1.875rem)] font-bold leading-[1.1] tracking-[-.028em]">
                   En pocas palabras
                 </h2>
                 <span className="inline-flex items-center rounded-pill bg-badge-bg px-2.5 py-0.5 text-xs font-medium text-badge-text">
@@ -198,7 +196,7 @@ export default function PrivacidadPage() {
 
             <Part id="responsable" n={1} title="Quién es el responsable">
               <p className="mt-3.5">El responsable del tratamiento de tus datos personales es:</p>
-              <dl className={`${cardClass} m-0 mt-[18px] px-6 py-1`}>
+              <dl className={`${cardClass} m-0 mt-[18px] px-5 py-1 min-[640px]:px-7`}>
                 <Fact label="Razón social">{RESPONSIBLE}</Fact>
                 <Fact label="NIT">{NIT}</Fact>
                 <Fact label="Dirección">{LEGAL_ADDRESS}</Fact>
@@ -225,11 +223,11 @@ export default function PrivacidadPage() {
 
             <Part id="derechos" n={3} title="Tus derechos">
               <p className="mt-3.5">Como titular de tus datos tienes derecho a:</p>
-              <div className="mt-[18px] grid gap-3 min-[700px]:grid-cols-2">
+              <div className="mt-[18px] grid gap-4 min-[700px]:grid-cols-2">
                 {RIGHTS.map((r) => (
-                  <div key={r.title} className="flex items-start gap-3 rounded-control bg-card-2 px-5 py-[18px] leading-normal">
-                    <Icon className="mt-0.5 text-accent-text">{r.icon}</Icon>
-                    <div>
+                  <div key={r.title} className="flex min-w-0 items-start gap-3 rounded-control bg-card-2 p-5 leading-normal">
+                    <Icon className="mt-0.5 shrink-0 text-accent-text">{r.icon}</Icon>
+                    <div className="min-w-0">
                       <strong className="block font-semibold">{r.title}</strong>
                       <span className="block text-sm text-muted">{r.text}</span>
                     </div>
@@ -250,7 +248,7 @@ export default function PrivacidadPage() {
               </p>
               <div className="mt-[18px] grid gap-4 min-[700px]:grid-cols-2">
                 {PROCEDURES.map((proc) => (
-                  <article key={proc.title} className={`${cardClass} p-6`}>
+                  <article key={proc.title} className={`${cardClass} min-w-0 p-5 min-[640px]:p-7`}>
                     <h3 className="text-lg font-bold">{proc.title}</h3>
                     <div className="mt-2.5 text-[2rem] font-bold leading-none tracking-[-.03em]">
                       {proc.days} <small className="text-sm font-medium tracking-normal text-muted">días hábiles</small>
@@ -260,7 +258,7 @@ export default function PrivacidadPage() {
                 ))}
               </div>
               <div className="mt-[18px] flex items-start gap-3 rounded-control bg-card-2 px-5 py-[18px] leading-[1.55]">
-                <Icon className="mt-[3px] text-accent-text">{infoIcon}</Icon>
+                <Icon className="mt-[3px] shrink-0 text-accent-text">{infoIcon}</Icon>
                 <span>
                   Si a tu reclamo le falta información, te pediremos completarlo en los 5 días siguientes. Si pasan 2
                   meses sin que lo completes, entenderemos que desististe. Mientras lo atendemos, marcamos el dato como
@@ -327,12 +325,12 @@ export default function PrivacidadPage() {
             </Part>
 
             <Part id="documento" n={8} title="Documento completo y versiones">
-              <div className={`${cardClass} mt-[18px] flex flex-wrap items-center justify-between gap-4 p-6`}>
-                <div className="flex items-center gap-3.5">
-                  <div className="grid size-[52px] shrink-0 place-items-center rounded-pill bg-cta text-cta-text">
+              <div className={`${cardClass} mt-[18px] flex min-w-0 flex-col items-stretch gap-4 p-5 min-[640px]:p-7`}>
+                <div className="flex min-w-0 items-start gap-3.5">
+                  <div className="grid size-11 shrink-0 place-items-center rounded-pill bg-badge-bg text-badge-text min-[640px]:size-[52px]">
                     <Icon d={ICONS.fileDown} />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <strong className="block font-bold">Política de Privacidad y Tratamiento de Datos Personales</strong>
                     <span className="block text-sm text-muted">
                       PDF{POLICY.pdfPages ? ` · ${POLICY.pdfPages} páginas` : null} · firmada por el representante legal{" "}
@@ -342,7 +340,7 @@ export default function PrivacidadPage() {
                 </div>
                 {/* Sin PDF firmado en el dominio todavía (RESUMEN §6 y §8.4): no se enlaza el OneDrive personal. */}
                 {POLICY.pdfUrl ? (
-                  <a href={POLICY.pdfUrl} className={`${buttonClass("ghost")} print:hidden`} download>
+                  <a href={POLICY.pdfUrl} className={`${buttonClass("ghost")} w-full min-[640px]:w-auto min-[640px]:self-start print:hidden`} download>
                     Descargar PDF
                   </a>
                 ) : (
@@ -351,7 +349,12 @@ export default function PrivacidadPage() {
                   </span>
                 )}
               </div>
-              <div className="overflow-x-auto">
+              <dl className={`${cardClass} m-0 mt-[18px] px-5 py-1 min-[640px]:hidden print:hidden`}>
+                <Fact label="Versión">{POLICY.version}</Fact>
+                <Fact label="Vigente desde"><ValidFrom /></Fact>
+                <Fact label="Cambios">Versión inicial.</Fact>
+              </dl>
+              <div className="hidden overflow-x-auto min-[640px]:block print:block">
                 <table className="mt-[18px] w-full border-collapse text-[15px]">
                   <thead>
                     <tr>
@@ -388,18 +391,19 @@ export default function PrivacidadPage() {
 
 function MetaChip({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <span className="inline-flex flex-wrap items-center gap-2 rounded-pill border border-line bg-card px-3.5 py-1">
-      {label} <strong className="font-semibold text-text">{children}</strong>
-    </span>
+    <div className="min-w-0 rounded-control border border-line bg-card p-4">
+      <span className="block text-[13px]">{label}</span>
+      <strong className="mt-1 block min-w-0 break-words font-semibold text-text">{children}</strong>
+    </div>
   );
 }
 
 function Part({ id, n, title, children }: { id: string; n: number; title: string; children: ReactNode }) {
   return (
-    <section id={id} className="mt-14 scroll-mt-24">
-      <h2 className="flex items-baseline gap-3.5 text-[1.625rem] font-bold leading-[1.2] tracking-[-.02em]">
-        <span className="text-[.75em] font-semibold text-accent-text">{n}</span>
-        {title}
+    <section id={id} className="mt-14 scroll-mt-24 lg:mt-18">
+      <h2 className="grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-3.5 text-[clamp(1.9rem,1.2rem+2.2vw,2.75rem)] font-bold leading-[1.1] tracking-[-.028em]">
+        <span className="text-base font-semibold tracking-normal text-muted tabular-nums">{String(n).padStart(2, "0")}</span>
+        <span>{title}</span>
       </h2>
       {children}
     </section>
@@ -408,21 +412,35 @@ function Part({ id, n, title, children }: { id: string; n: number; title: string
 
 function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="flex flex-wrap justify-between gap-x-6 gap-y-1 border-b border-line-soft py-3.5 last:border-b-0">
+    <div className="grid min-w-0 gap-1.5 border-b border-line-soft py-4 last:border-b-0 min-[640px]:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] min-[640px]:gap-6">
       <dt className="text-muted">{label}</dt>
-      <dd className="m-0 text-right font-semibold">{children}</dd>
+      <dd className="m-0 min-w-0 break-words font-semibold min-[640px]:text-right">{children}</dd>
     </div>
   );
 }
 
 function BorderedItem({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
   return (
-    <div className="flex items-start gap-3 rounded-control border border-line px-4 py-3.5 leading-normal">
-      <Icon className="mt-0.5 size-4 text-accent-text">{icon}</Icon>
-      <span>
+    <div className="flex min-w-0 items-start gap-3 rounded-control border border-line p-5 leading-normal">
+      <Icon className="mt-0.5 size-4 shrink-0 text-accent-text">{icon}</Icon>
+      <span className="min-w-0">
         <strong className="block font-semibold">{title}</strong>
         <span className="block text-sm text-muted">{text}</span>
       </span>
     </div>
+  );
+}
+
+function PolicyContents() {
+  return (
+    <ol className="m-0 grid list-none gap-0.5 p-0">
+      {TOC.map((item) => (
+        <li key={item.id}>
+          <a href={`#${item.id}`} className="flex min-h-11 items-center rounded-control px-3 py-2 text-sm font-medium leading-[1.35] no-underline hover:bg-bg-alt">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ol>
   );
 }

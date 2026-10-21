@@ -45,7 +45,7 @@ export function SectionHead({
   return (
     <div className={className}>
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-3 text-[clamp(1.75rem,1.2rem+1.8vw,2.25rem)] font-bold leading-[1.15] tracking-[-.024em]">
+      <h2 className="mt-3.5 text-[clamp(1.9rem,1.2rem+2.2vw,2.75rem)] font-bold leading-[1.1] tracking-[-.028em]">
         {title}
       </h2>
       {lead ? <p className="mt-3.5 max-w-[620px] text-[1.0625rem] text-muted">{lead}</p> : null}

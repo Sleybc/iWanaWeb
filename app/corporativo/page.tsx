@@ -52,10 +52,10 @@ export default function CorporativoPage() {
           </div>
         </section>
 
-        <section className="py-14">
+        <section className="py-14 lg:py-18">
           <div className="wrap">
             <SectionHead eyebrow="Herramientas" title="Elige el portal." />
-            <ul className="m-0 grid list-none gap-5 p-0 min-[640px]:grid-cols-2 min-[960px]:grid-cols-3">
+            <ul className="m-0 grid list-none gap-6 p-0 min-[640px]:grid-cols-2 min-[960px]:grid-cols-3">
               {INTERNAL_PORTALS.map((portal) => (
                 <li key={portal.name}>
                   <ExternalLink
@@ -81,7 +81,7 @@ export default function CorporativoPage() {
               ))}
             </ul>
             <p role="note" className="mt-6 flex max-w-[760px] items-start gap-2.5 text-[15px] text-muted">
-              <Icon d={ICONS.lock} className="mt-[3px] size-4 text-accent-text" />
+              <Icon d={ICONS.lock} className="mt-[3px] size-4 shrink-0 text-accent-text" />
               <span>
                 Cada portal pide su propio usuario y contraseña. No las compartas ni las dejes guardadas en equipos de
                 uso público.

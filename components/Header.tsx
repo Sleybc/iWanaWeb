@@ -63,7 +63,7 @@ export function Header({ current, variant = "page" }: { current?: string; varian
       <div className="wrap relative">
         <div className="flex min-h-[72px] items-center justify-between gap-4 max-[360px]:gap-1">
           <Brand />
-          <nav aria-label="Principal" className="hidden gap-[30px] min-[1080px]:flex">
+          <nav aria-label="Principal" className="hidden gap-4 min-[1080px]:flex min-[1200px]:gap-[30px]">
             {nav.map((item) => {
               const cur = item.key === current;
               const pay = home && item.key === "pagar";
