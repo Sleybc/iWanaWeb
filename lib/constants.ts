@@ -28,6 +28,7 @@ export const HOSTING_PROVIDER = "Hostinger";
 export const PRICE_FROM = "$55.000";
 
 export const WA_TEXT = {
+  visita: "Hola, quiero solicitar una visita para revisar la disponibilidad del servicio en mi ubicación.",
   pago: "Hola, necesito ayuda con mi pago.",
   plan: "Hola, quiero saber la velocidad de mi plan.",
   velocidadBaja: "Hola, mi velocidad medida fue baja.",
@@ -151,10 +152,10 @@ export function waTownLink(town: TownName): string {
  * (confirmado por iWana el 2026-10-21).
  */
 export const PLANS = [
-  { name: "Plan Básico", price: "$55.000", title: "Lo esencial", wiredPoint: false },
-  { name: "Plan Básico +", price: "$65.000", title: "Un paso más", wiredPoint: false },
-  { name: "Plan Medio", price: "$79.000", title: "Para toda la familia", popular: true, wiredPoint: true },
-  { name: "Plan Alto", price: "$100.000", title: "Hogares muy conectados y negocios", wiredPoint: true },
+  { name: "Plan Básico", price: "$55.000", title: "Lo esencial", wiredPoint: false, technology: "Fibra o Radio Enlace" },
+  { name: "Plan Básico +", price: "$65.000", title: "Un paso más", wiredPoint: false, technology: "Fibra Óptica" },
+  { name: "Plan Medio", price: "$79.000", title: "Para toda la familia", popular: true, wiredPoint: true, technology: "Fibra o Radio Enlace" },
+  { name: "Plan Alto", price: "$100.000", title: "Hogares muy conectados y negocios", wiredPoint: true, technology: "Fibra o Radio Enlace" },
 ] as const;
 
 export type PlanName = (typeof PLANS)[number]["name"];

@@ -19,7 +19,7 @@ import { ICONS } from "@/lib/icons";
 export const metadata: Metadata = {
   title: { absolute: "iWana — Internet en el Tequendama" },
   description:
-    "Internet estable para tu casa, finca y negocio en el pueblo y en el campo del Tequendama. Fibra Óptica o Radio Enlace al mismo precio.",
+    "Internet estable para tu casa, finca y negocio en el pueblo y en el campo del Tequendama. Fibra Óptica o Radio Enlace con la misma mensualidad.",
 };
 
 const townCount = COVERAGE.municipios.length + COVERAGE.rurales.length;
@@ -50,34 +50,51 @@ const FACTS: { icon: ReactNode; title: string; text: string }[] = [
     title: "2 tecnologías",
     text: "Fibra Óptica y Radio Enlace",
   },
-  { icon: <path d={ICONS.check} />, title: "Mismo precio", text: "con cualquiera de las dos" },
+  { icon: <path d={ICONS.check} />, title: "Misma mensualidad", text: "con cualquiera de las dos" },
   { icon: <path d={ICONS.home} />, title: `${OFFICES.length} puntos de atención`, text: "El Colegio, San Antonio y Tena" },
 ];
 
 const FAQ: { q: string; a: ReactNode }[] = [
   {
-    q: "¿Cómo sé si me llega Fibra Óptica o Radio Enlace?",
-    // Visita sin costo: confirmado por iWana el 2026-10-21 (RESUMEN §7.4).
-    a: "Un técnico visita tu predio sin costo para revisar la viabilidad y te dice cuál tecnología funciona mejor allí.",
+    q: "¿Cómo solicito el servicio?",
+    a: "Contáctanos por WhatsApp, teléfono o en un punto de atención para agendar una visita sin costo. Revisamos tu ubicación y te confirmamos cómo podemos conectarte.",
   },
   {
-    q: "¿Cuesta lo mismo con cualquier tecnología?",
-    a: "Sí. El precio del plan es el mismo con Fibra Óptica y con Radio Enlace.",
+    q: "¿La mensualidad cambia entre fibra y radio enlace?",
+    a: "Los planes disponibles en ambas tecnologías mantienen la misma mensualidad. Por ahora, el Plan Básico + solo está disponible en Fibra Óptica.",
   },
-  { q: "¿Cuánto tarda la instalación?", a: "Agendamos la fecha contigo cuando confirmamos la viabilidad." },
   {
-    q: "Mi vereda no aparece, ¿pueden llegar?",
-    a: "Escríbenos por WhatsApp con el nombre de tu vereda; revisamos cada caso.",
+    q: "¿La instalación tiene costo?",
+    a: "Puede tener un costo según tu ubicación y la instalación requerida. Te confirmamos el valor, si aplica, en la visita de viabilidad, antes de contratar.",
+  },
+  {
+    q: "¿Cuándo instalan mi servicio?",
+    a: "Después de confirmar la viabilidad y aceptar las condiciones, acordamos contigo la fecha de instalación.",
+  },
+  {
+    q: "¿Qué velocidad tendrá mi plan?",
+    a: "Depende del plan y de la tecnología disponible en tu ubicación. Te la confirmamos por escrito durante la visita de viabilidad.",
   },
   {
     q: "¿Cómo pago mi factura?",
     a: (
       <>
-        En el{" "}
-        <Link href={ROUTES.pagar} className="font-bold text-accent-text">
-          Portal de pagos
-        </Link>{" "}
-        o en nuestros puntos de atención.
+        Puedes consultar y pagar tu factura en el{" "}
+        <Link href={ROUTES.pagar} className="font-bold text-accent-text">Portal de pagos</Link>{" "}
+        o pagar en nuestros{" "}
+        <a href="#puntos" className="font-bold text-accent-text">puntos de atención</a>.
+      </>
+    ),
+  },
+  {
+    q: "¿Qué hago si tengo una falla?",
+    a: (
+      <>
+        Escríbenos por{" "}
+        <ExternalLink href={waLink("soporte")} className="font-bold text-accent-text">WhatsApp</ExternalLink>{" "}
+        o llámanos al{" "}
+        <a href={`tel:${PBX_TEL}`} className="font-bold text-accent-text">{PBX_DISPLAY}</a>{" "}
+        para revisar tu servicio.
       </>
     ),
   },
@@ -95,7 +112,7 @@ export default function Home() {
               Internet estable para tu casa, <em className="not-italic text-accent-text">finca y negocio.</em>
             </h1>
             <p className="mt-[22px] max-w-[600px] text-[1.1875rem] text-hero-muted">
-              Llegamos con Fibra Óptica o Radio Enlace, al mismo precio, con atención y soporte locales.
+              Fibra Óptica o Radio Enlace con la misma mensualidad, atención y soporte locales.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#planes" className={buttonClass("primary")}>
@@ -144,30 +161,31 @@ export default function Home() {
                 main
                 icon={<path d={ICONS.card} />}
                 title="Paga tu factura"
-                text="Consulta y paga tu servicio en línea desde el Portal de pagos."
+                text="Consulta tu factura y paga en línea."
               >
-                <Link href={ROUTES.pagar} className={`${buttonClass("primary")} mt-2 self-start`}>
-                  Ir al Portal de pagos
+                <Link href={ROUTES.pagar} className={`${buttonClass("primary")} mt-2 w-full min-[640px]:w-auto min-[640px]:self-start`}>
+                  Pagar mi factura
                   <Icon d={ICONS.arrowRight} className="size-4" />
                 </Link>
               </ClientCard>
               <ClientCard
-                icon={<path d={ICONS.gauge} />}
-                title="Mide tu velocidad"
-                text="Haz el test de velocidad para revisar cómo está funcionando tu conexión."
+                icon={<path d={ICONS.headset} />}
+                title="¿Necesitas ayuda?"
+                text="Escríbenos por WhatsApp para revisar tu servicio."
               >
-                <Link href={ROUTES.test} className={`${buttonClass("ghost")} mt-2 self-start`}>
-                  Hacer el test de velocidad
-                </Link>
+                <ExternalLink href={waLink("soporte")} className={`${buttonClass("ghost")} mt-2 w-full min-[640px]:w-auto min-[640px]:self-start`}>
+                  <Icon d={ICONS.whatsapp} className="size-4" />
+                  Pedir soporte
+                </ExternalLink>
               </ClientCard>
               <ClientCard
-                icon={<path d={ICONS.headset} />}
-                title="Pide soporte"
-                text="¿Algo no funciona bien? Escríbenos y te ayudamos."
+                icon={<path d={ICONS.gauge} />}
+                title="Mide tu velocidad"
+                text="Comprueba la velocidad de tu conexión."
               >
-                <ExternalLink href={waLink("soporte")} className={`${buttonClass("ghost")} mt-2 self-start`}>
-                  Soporte por WhatsApp
-                </ExternalLink>
+                <Link href={ROUTES.test} className={`${buttonClass("ghost")} mt-2 w-full min-[640px]:w-auto min-[640px]:self-start`}>
+                  Medir velocidad
+                </Link>
               </ClientCard>
             </div>
           </div>
@@ -183,8 +201,8 @@ export default function Home() {
           <div className="wrap">
             <SecHead
               eyebrow="Tecnologías"
-              title="Dos tecnologías, un mismo precio."
-              lead="Usamos la que mejor funcione en tu ubicación. Tú solo eliges el plan."
+              title="Dos formas de conectarte, la misma mensualidad."
+              lead="Usamos la tecnología que mejor funcione en tu ubicación. Tú eliges el plan; nosotros revisamos cómo llevarte la conexión."
             />
             <div className="grid gap-6 min-[900px]:grid-cols-2">
               <TechCard
@@ -194,7 +212,7 @@ export default function Home() {
                 specs={[
                   ["Cómo llega", "Por cable de fibra"],
                   ["Dónde la usamos", "Donde la red ya pasa cerca"],
-                  ["Precio", "El mismo del plan"],
+                  ["Mensualidad", "La misma del plan"],
                 ]}
               />
               <TechCard
@@ -204,16 +222,16 @@ export default function Home() {
                 specs={[
                   ["Cómo llega", "Por aire, de antena a antena"],
                   ["Dónde la usamos", "Veredas y fincas"],
-                  ["Precio", "El mismo del plan"],
+                  ["Mensualidad", "La misma del plan"],
                 ]}
               />
             </div>
             <div className={`${cardClass} mt-6 flex flex-wrap items-center justify-between gap-5 px-8 py-7`}>
               <div>
-                <strong className="block text-xl tracking-[-.01em]">No tienes que elegir.</strong>
+                <strong className="block text-xl tracking-[-.01em]">Te ayudamos a elegir.</strong>
                 <p className="mt-1 max-w-[640px] text-muted">
-                  En la visita de viabilidad revisamos tu ubicación y te instalamos la tecnología que mejor funcione
-                  allí, al mismo precio.
+                  En la visita de viabilidad confirmamos qué tecnología podemos instalar y te explicamos las condiciones
+                  y el valor de la instalación, si aplica, antes de que decidas contratar.
                 </p>
               </div>
               <a href="#cobertura" className={buttonClass("primary")}>
@@ -228,7 +246,7 @@ export default function Home() {
             <SecHead
               eyebrow="Planes"
               title="¿Qué plan necesitas?"
-              lead="Elige un plan y mira para qué te alcanza. Precios mensuales, iguales con Fibra Óptica o Radio Enlace."
+              lead="Encuentra el plan que mejor se adapte a tu uso de internet. Los planes disponibles en ambas tecnologías mantienen la misma mensualidad."
             />
             <PlanExplorer />
           </div>
@@ -239,27 +257,19 @@ export default function Home() {
             <SecHead
               eyebrow="Cobertura"
               title="¿Llegamos a tu zona?"
-              lead="Elige tu municipio en el mapa o en la lista. Si tu vereda no aparece, escríbenos: revisamos cada caso."
+              lead="Selecciona tu municipio. Confirmamos la disponibilidad en tu dirección o vereda."
             />
             <CoverageFinder />
           </div>
         </section>
 
         <section id="preguntas" className={`${secClass} bg-bg-alt`}>
-          <div className="wrap grid gap-10 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="wrap grid items-start gap-7 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:grid-rows-[auto_1fr] lg:gap-x-20">
             <div>
               <Eyebrow>Preguntas frecuentes</Eyebrow>
               <h2 className={h2Class}>Resolvemos tus dudas.</h2>
-              <div className={`${cardClass} mt-7 p-6`}>
-                <strong className="block text-lg">¿Tienes otra pregunta?</strong>
-                <p className="mt-1.5 text-[15px] text-muted">Escríbenos por WhatsApp o llámanos al {PBX_DISPLAY}.</p>
-                <ExternalLink href={waLink("contacto")} className={`${buttonClass("ghost")} mt-4`}>
-                  <Icon d={ICONS.whatsapp} className="size-4" />
-                  Escríbenos
-                </ExternalLink>
-              </div>
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-3 lg:col-start-2 lg:row-start-1 lg:row-span-2">
               {FAQ.map((item) => (
                 <details
                   key={item.q}
@@ -276,12 +286,20 @@ export default function Home() {
                 </details>
               ))}
             </div>
+              <div className={`${cardClass} p-6 lg:col-start-1 lg:row-start-2`}>
+                <strong className="block text-lg">¿Tienes otra pregunta?</strong>
+                <p className="mt-1.5 text-[15px] text-muted">Escríbenos por WhatsApp o llámanos al{" "}<a href={`tel:${PBX_TEL}`} className="font-semibold text-accent-text">{PBX_DISPLAY}</a>.</p>
+                <ExternalLink href={waLink("contacto")} className={`${buttonClass("ghost")} mt-4 w-full min-[640px]:w-auto`}>
+                  <Icon d={ICONS.whatsapp} className="size-4" />
+                  Escríbenos
+                </ExternalLink>
+              </div>
           </div>
         </section>
 
         <section id="puntos" className={secClass}>
           <div className="wrap">
-            <SecHead eyebrow="Puntos de atención" title="Visítanos." />
+            <SecHead eyebrow="Puntos de atención" title="Visítanos." lead="Solicita tu servicio, paga tu factura o recibe orientación en nuestros puntos de atención." />
             <div className="grid gap-6 min-[960px]:grid-cols-3">
               {OFFICES.map((office) => (
                 <OfficeCard key={office.name} office={office} />
@@ -290,7 +308,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-deep py-16 text-white">
+        <section id="conectate" className="relative overflow-hidden bg-deep py-16 text-white">
           <svg
             viewBox="0 0 1440 300"
             preserveAspectRatio="none"
@@ -315,16 +333,16 @@ export default function Home() {
               <h2 className="max-w-[640px] text-[clamp(2rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.05] tracking-[-.03em]">
                 Conéctate con iWana.
               </h2>
-              <p className="mt-3 text-lg text-iwana-primary-200">Solicita tu servicio y agenda la visita de viabilidad.</p>
+              <p className="mt-3 max-w-[620px] text-lg text-iwana-primary-200">Cuéntanos dónde estás y solicita una visita sin costo. Revisamos cómo podemos conectarte.</p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <ExternalLink href={waLink("contratar")} className={buttonClass("lime")}>
-                Solicitar servicio
-                <Icon d={ICONS.arrowRight} className="size-4" />
+            <div className="flex flex-col gap-3 min-[640px]:flex-row min-[640px]:flex-wrap min-[960px]:shrink-0">
+              <ExternalLink href={waLink("visita")} className={`${buttonClass("lime")} w-full min-[640px]:w-auto`}>
+                <Icon d={ICONS.whatsapp} className="size-4" />
+                Solicitar por WhatsApp
               </ExternalLink>
-              <a href={`tel:${PBX_TEL}`} className={buttonClass("onnavy")}>
+              <a href={`tel:${PBX_TEL}`} className={`${buttonClass("onnavy")} w-full min-[640px]:w-auto`}>
                 <Icon d={ICONS.phone} className="size-4" />
-                {PBX_DISPLAY}
+                Llamar al {PBX_DISPLAY}
               </a>
             </div>
           </div>
@@ -359,9 +377,9 @@ function ClientCard({
   children: ReactNode;
 }) {
   return (
-    <article className={`${cardClass} flex flex-col gap-3 p-7`}>
+    <article className={`${cardClass} flex flex-col gap-2 p-5 min-[640px]:gap-3 min-[640px]:p-7`}>
       <div
-        className={`grid size-[52px] place-items-center rounded-pill ${
+        className={`grid size-11 min-[640px]:size-[52px] place-items-center rounded-pill ${
           main ? "bg-cta text-cta-text" : "bg-badge-bg text-badge-text"
         }`}
       >
@@ -387,7 +405,7 @@ function TechCard({
 }) {
   return (
     <article className={`${cardClass} flex flex-col overflow-hidden`}>
-      <div className="mx-3 mt-3 h-[200px] overflow-hidden rounded-control bg-card-2">{art}</div>
+      <div className="mx-3 mt-3 aspect-[14/5] overflow-hidden rounded-control bg-card-2 min-[640px]:aspect-auto min-[640px]:h-[200px]">{art}</div>
       <div className="px-7 pt-7 pb-2">
         <h3 className="text-2xl font-bold tracking-[-.02em]">{title}</h3>
         <p className="mt-2.5 text-muted">{text}</p>
@@ -409,7 +427,7 @@ const LIME = "var(--color-iwana-secondary)";
 function FiberArt() {
   const cable = "M40 140 C140 132 220 140 300 134 C360 130 400 128 440 126";
   return (
-    <svg viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" className="size-full">
+    <svg viewBox="0 0 560 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" className="size-full">
       <path d="M0 150 C120 140 220 150 340 142 C430 136 500 142 560 138 L560 200 L0 200 Z" fill="var(--line)" />
       <path d={cable} stroke={LIME} strokeWidth="4" strokeLinecap="round" fill="none" />
       <path d={cable} stroke="var(--text)" strokeWidth="1" strokeDasharray="1 10" strokeLinecap="round" fill="none" opacity="0.5" />
@@ -426,7 +444,7 @@ function FiberArt() {
 
 function RadioArt() {
   return (
-    <svg viewBox="0 0 560 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" className="size-full">
+    <svg viewBox="0 0 560 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" className="size-full">
       <path
         d="M0 160 C90 120 160 100 230 118 C300 136 360 150 420 132 C480 114 520 120 560 128 L560 200 L0 200 Z"
         fill="var(--line)"

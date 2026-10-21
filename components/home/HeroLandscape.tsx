@@ -14,20 +14,6 @@ const STARS = [
   [300, 180, 1],
 ];
 
-// [x, y, ancho, alto] de cada edificio con ventanas.
-const BUILDINGS = [
-  [660, 528, 46, 58],
-  [712, 502, 38, 84],
-  [756, 540, 60, 46],
-  [822, 476, 34, 110],
-  [862, 516, 56, 70],
-  [924, 534, 44, 52],
-  [974, 494, 62, 92],
-  [1042, 526, 40, 60],
-  [1088, 512, 52, 74],
-];
-
-const FIBER_NODES = [683, 731, 786, 839, 890, 946, 1005, 1062, 1114, 1162];
 const LIME = "var(--color-iwana-secondary)";
 
 export function HeroLandscape() {
@@ -63,22 +49,80 @@ export function HeroLandscape() {
       />
 
       <g>
-        <path d="M610 586 v-20 l18 -16 l18 16 v20 Z" fill="var(--bld)" />
-        {BUILDINGS.map(([x, y, w, h]) => (
-          <g key={x}>
-            <rect x={x} y={y} width={w} height={h} rx="2" fill="var(--bld)" />
-            <rect x={x + 4} y={y + 4} width={w - 8} height={h - 10} fill="url(#win)" />
-          </g>
-        ))}
-        <path d="M822 476 l17 -18 l17 18 Z" fill="var(--bld)" />
-        <path d="M1146 586 v-22 l16 -14 l16 14 v22 Z" fill="var(--bld)" />
+        {/* Edificios residenciales y comerciales al fondo del casco urbano. */}
+        <g fill="var(--bld)">
+          <rect x="664" y="520" width="36" height="66" rx="2" />
+          <rect x="744" y="486" width="36" height="100" rx="2" />
+          <rect x="846" y="496" width="42" height="90" rx="2" />
+          <rect x="976" y="510" width="38" height="76" rx="2" />
+          <rect x="1104" y="498" width="40" height="88" rx="2" />
+        </g>
+        <g fill="url(#win)">
+          <rect x="670" y="528" width="24" height="46" />
+          <rect x="750" y="494" width="24" height="78" />
+          <rect x="852" y="504" width="30" height="68" />
+          <rect x="982" y="518" width="26" height="54" />
+          <rect x="1110" y="506" width="28" height="68" />
+        </g>
+        {/* Instituciones a escala de barrio, integradas con las viviendas. */}
+        <g transform="translate(224 164.08) scale(.72)">
+        {/* Hospital: alas con ventanas, entrada y símbolo de salud. */}
+        <g>
+          <rect x="660" y="524" width="144" height="62" rx="2" fill="var(--bld)" />
+          <rect x="698" y="492" width="68" height="94" rx="2" fill="var(--bld)" />
+          <rect x="668" y="534" width="24" height="40" fill="url(#win)" />
+          <rect x="772" y="534" width="24" height="40" fill="url(#win)" />
+          <path d="M727 501 h10 v9 h9 v10 h-9 v9 h-10 v-9 h-9 v-10 h9 Z" fill="var(--win)" />
+          <path d="M719 586 v-26 h26 v26" fill="var(--win)" />
+          <path d="M732 560 v26" stroke="var(--bld)" strokeWidth="2" />
+        </g>
+        {/* Alcaldía: frontón, columnas y bandera del municipio. */}
+        <g>
+          <rect x="830" y="518" width="130" height="68" rx="2" fill="var(--bld)" />
+          <path d="M820 518 l75 -42 l75 42 Z" fill="var(--bld)" />
+          <path d="M895 476 v-25" stroke="var(--bld)" strokeWidth="2" />
+          <path d="M896 451 h25 l-5 7 l5 7 h-25 Z" fill={LIME} />
+          <path d="M846 531 v43 M874 531 v43 M916 531 v43 M944 531 v43" stroke="var(--win)" strokeWidth="7" />
+          <rect x="885" y="550" width="20" height="30" fill="var(--win)" />
+          <path d="M824 580 h142 M820 586 h150" stroke="var(--bld)" strokeWidth="5" />
+        </g>
+        {/* Colegio: pabellones bajos, acceso central y libro abierto. */}
+        <g>
+          <rect x="986" y="530" width="154" height="56" rx="2" fill="var(--bld)" />
+          <path d="M978 530 h170 l-12 -10 h-146 Z" fill="var(--bld)" />
+          <rect x="1039" y="502" width="48" height="84" rx="2" fill="var(--bld)" />
+          <path d="M1049 511 q7 -3 14 1 q7 -4 14 -1 v13 q-7 -3 -14 1 q-7 -4 -14 -1 Z M1063 512 v13" fill="none" stroke="var(--win)" strokeWidth="2" strokeLinejoin="round" />
+          <rect x="994" y="541" width="36" height="30" fill="url(#win)" />
+          <rect x="1096" y="541" width="36" height="30" fill="url(#win)" />
+          <rect x="1053" y="557" width="20" height="29" fill="var(--win)" />
+        </g>
+        </g>
+        {/* Casas, un local y árboles completan la calle conectada por fibra. */}
+        <g fill="var(--bld)">
+          <path d="M610 586 v-25 l20 -18 l20 18 v25 Z" />
+          <path d="M650 586 v-18 l14 -13 l14 13 v18 Z" />
+          <path d="M1058 586 v-28 l20 -18 l20 18 v28 Z" />
+          <path d="M1148 586 v-28 l20 -18 l20 18 v28 Z" />
+          <rect x="1195" y="552" width="42" height="34" rx="2" />
+        </g>
+        <g fill="var(--win)">
+          <rect x="619" y="563" width="8" height="8" rx="1" />
+          <rect x="633" y="571" width="8" height="15" />
+          <rect x="1067" y="561" width="8" height="8" rx="1" />
+          <rect x="1081" y="571" width="8" height="15" />
+          <rect x="1157" y="562" width="8" height="8" rx="1" />
+          <rect x="1171" y="572" width="8" height="14" />
+          <rect x="1200" y="565" width="19" height="14" rx="1" />
+          <rect x="1223" y="565" width="9" height="21" />
+        </g>
+        <path d="M1193 552 h46 l-4 9 h-38 Z" fill={LIME} opacity=".65" />
+        <path d="M1039 574 v12 M1188 570 v16" stroke="var(--bld)" strokeWidth="3" />
+        <g fill="var(--tree)">
+          <circle cx="1039" cy="569" r="9" />
+          <circle cx="1188" cy="566" r="8" />
+        </g>
       </g>
       <path d="M610 596 H1440" stroke={LIME} strokeWidth="3" strokeLinecap="round" fill="none" />
-      <g fill={LIME}>
-        {FIBER_NODES.map((cx) => (
-          <circle key={cx} cx={cx} cy="596" r="4" />
-        ))}
-      </g>
 
       <g stroke="var(--bld)" strokeWidth="2.5" strokeLinecap="round" fill="none">
         <path d="M488 546 L500 470 L512 546 M492 522 L508 522 M495 498 L505 498" />

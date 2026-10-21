@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { COVERAGE, type TownName, waLink, waTownLink } from "@/lib/constants";
+import { ICONS } from "@/lib/icons";
 import { ExternalLink } from "../ExternalLink";
 import { buttonClass, cardClass, Icon } from "../ui";
 
@@ -17,7 +18,7 @@ const TOWNS: { name: TownName; short: string; pos: string }[] = [
 ];
 
 const isFull = (town: TownName) => (COVERAGE.municipios as readonly string[]).includes(town);
-const kindLabel = (town: TownName) => (isFull(town) ? "Todo el municipio" : "Zonas rurales");
+const kindLabel = (town: TownName) => (isFull(town) ? "Zona urbana y rural" : "Zonas rurales");
 
 const fullCore = "border-2 border-text bg-iwana-secondary";
 const ruralCore =
@@ -28,7 +29,56 @@ export function CoverageFinder() {
 
   return (
     <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-      <div className={`${cardClass} relative p-5`}>
+      <div className={`${cardClass} flex flex-col p-5 min-[640px]:p-7 lg:order-2`}>
+        <h3 className="text-xl font-bold">Consulta tu municipio</h3>
+        <p className="mt-1.5 text-[15px] text-muted">Elige un municipio para revisar dónde prestamos servicio.</p>
+        <ul className="m-0 mt-[18px] grid list-none gap-2 p-0">
+          {TOWNS.map((t, i) => {
+            const on = t.name === selected;
+            return (
+              <li key={t.name}>
+                <button
+                  type="button"
+                  aria-expanded={on}
+                  aria-controls={`cobertura-municipio-${i}`}
+                  onClick={() => setSelected(on ? null : t.name)}
+                  className={`flex min-h-[52px] w-full cursor-pointer items-center justify-between gap-3 rounded-control border px-4 py-2.5 text-left font-semibold text-text transition-colors ${
+                    on ? "border-sel-border bg-sel-bg" : "border-line bg-card hover:border-control hover:bg-bg-alt"
+                  }`}
+                >
+                  <span>{t.name}</span>
+                  <span className="inline-flex max-w-[110px] shrink-0 items-center gap-1.5 text-right text-xs font-semibold text-muted">
+                    {kindLabel(t.name)}
+                    <Icon d="m9 18 6-6-6-6" className={`size-4 shrink-0 transition-transform ${on ? "rotate-90" : ""}`} />
+                  </span>
+                </button>
+                <div id={`cobertura-municipio-${i}`} aria-live="polite">
+                  {on && (
+                    <div className="mt-2 rounded-control bg-card-2 p-4">
+                      <p className="text-[15px] text-muted">
+                        {isFull(t.name)
+                          ? `Tenemos presencia en la zona urbana y rural de ${t.name}. Revisamos tu ubicación para confirmar cómo podemos conectarte.`
+                          : `Atendemos algunas zonas rurales de ${t.name}. Cuéntanos tu vereda para revisar la disponibilidad.`}
+                      </p>
+                      <ExternalLink href={waTownLink(t.name)} className={`${buttonClass("primary")} mt-4 w-full`}>
+                        <Icon d={ICONS.whatsapp} className="size-4" />
+                        Confirmar mi cobertura
+                      </ExternalLink>
+                    </div>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="mt-4 text-sm text-muted">
+          ¿No encuentras tu municipio?{" "}
+          <ExternalLink href={waLink("viabilidad")} className="font-bold text-accent-text">
+            Consulta tu ubicación por WhatsApp
+          </ExternalLink>
+        </p>
+      </div>
+      <div className={`${cardClass} relative p-5 lg:order-1`}>
         <div className="relative aspect-[7/6] w-full overflow-hidden rounded-control bg-map-bg">
           <svg viewBox="0 0 700 600" preserveAspectRatio="none" aria-hidden="true" className="absolute inset-0 size-full">
             <g fill="none" stroke="var(--contour)" strokeWidth="1.5">
@@ -84,7 +134,7 @@ export function CoverageFinder() {
         <div className="mt-3.5 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted">
           <span className="inline-flex items-center gap-2">
             <i aria-hidden="true" className="size-3 rounded-full border-[1.5px] border-text bg-iwana-secondary" />
-            Todo el municipio
+            Zona urbana y rural
           </span>
           <span className="inline-flex items-center gap-2">
             <i aria-hidden="true" className="size-3 rounded-full border-[1.5px] border-dashed border-accent-text" />
@@ -93,61 +143,6 @@ export function CoverageFinder() {
         </div>
       </div>
 
-      <div className={`${cardClass} flex flex-col p-7`}>
-        <h3 className="text-xl font-bold">Consulta tu municipio</h3>
-        <p className="mt-1.5 text-[15px] text-muted">
-          Te decimos qué cobertura tenemos y te ayudamos a confirmar tu dirección.
-        </p>
-        <ul className="m-0 mt-[18px] grid list-none gap-2 p-0">
-          {TOWNS.map((t) => {
-            const on = t.name === selected;
-            return (
-              <li key={t.name}>
-                <button
-                  type="button"
-                  aria-pressed={on}
-                  onClick={() => setSelected(t.name)}
-                  className={`flex min-h-[52px] w-full cursor-pointer items-center justify-between gap-3 rounded-control border px-4 py-2.5 text-left font-semibold text-text transition-colors ${
-                    on ? "border-sel-border bg-sel-bg" : "border-line bg-card hover:border-control hover:bg-bg-alt"
-                  }`}
-                >
-                  <span>{t.name}</span>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted">
-                    {kindLabel(t.name)}
-                    <Icon d="m9 18 6-6-6-6" className="size-4" />
-                  </span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-        <div aria-live="polite" className="mt-5 rounded-control bg-card-2 p-5">
-          {selected ? (
-            <>
-              <span className="inline-flex items-center rounded-pill bg-badge-bg px-2.5 py-0.5 text-xs font-medium text-badge-text">
-                {kindLabel(selected)}
-              </span>
-              <h4 className="mt-2.5 text-lg font-bold">{selected}</h4>
-              <p className="mt-1.5 text-[15px] text-muted">
-                {isFull(selected)
-                  ? `Tenemos cobertura en ${selected}. Te llevamos Fibra Óptica o Radio Enlace según tu dirección; lo confirmamos en la visita.`
-                  : `Llegamos a varias zonas rurales de ${selected}. Escríbenos con tu vereda y te confirmamos si tenemos señal.`}
-              </p>
-              <ExternalLink href={waTownLink(selected)} className={`${buttonClass("primary")} mt-4 w-full`}>
-                Confirmar mi zona por WhatsApp
-              </ExternalLink>
-            </>
-          ) : (
-            <p className="text-[15px] text-muted">Selecciona un municipio para ver la cobertura.</p>
-          )}
-        </div>
-        <p className="mt-4 text-sm text-muted">
-          ¿Tu vereda no aparece?{" "}
-          <ExternalLink href={waLink("vereda")} className="font-bold text-accent-text">
-            Pregúntanos por WhatsApp
-          </ExternalLink>
-        </p>
-      </div>
     </div>
   );
 }

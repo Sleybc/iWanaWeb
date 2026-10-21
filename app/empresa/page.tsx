@@ -25,7 +25,7 @@ import { ICONS } from "@/lib/icons";
 
 export const metadata: Metadata = {
   title: "Nuestra empresa",
-  description: "iWana lleva internet a hogares, fincas y negocios del Tequendama, con Fibra Óptica o Radio Enlace al mismo precio.",
+  description: "Internet para hogares, fincas y negocios del Tequendama. Fibra Óptica o Radio Enlace con la misma mensualidad y atención cercana.",
 };
 
 const townCount = COVERAGE.municipios.length + COVERAGE.rurales.length;
@@ -53,7 +53,7 @@ const FACTS: { icon: ReactNode; title: string; text: string }[] = [
         <circle cx="12" cy="9" r="2" />
       </>
     ),
-    title: "2 tecnologías, un precio",
+    title: "2 tecnologías",
     text: "Fibra Óptica y Radio Enlace",
   },
   {
@@ -85,7 +85,7 @@ const STEPS = [
   { title: "Escríbenos", text: "Cuéntanos dónde estás por WhatsApp, por teléfono o en un punto de atención." },
   {
     title: "Visita de viabilidad",
-    text: "Un técnico revisa tu ubicación y define la tecnología que mejor funciona allí.",
+    text: "Un técnico revisa tu ubicación, confirma qué tecnología podemos instalar y te explica las condiciones y el valor de la instalación, si aplica, antes de que decidas contratar.",
   },
   { title: "Instalación", text: "Instalamos tu servicio en la fecha que acordemos contigo." },
 ];
@@ -178,7 +178,7 @@ export default function EmpresaPage() {
             <SectionHead
               eyebrow="Lo que hacemos"
               title="Internet estable, con atención cercana."
-              lead="Llegamos con Fibra Óptica o Radio Enlace, según tu ubicación, y al mismo precio."
+              lead="Según tu ubicación, llegamos con Fibra Óptica o Radio Enlace. La mensualidad de tu plan es la misma."
             />
             <div className="grid gap-5 min-[900px]:grid-cols-3">
               {TILES.map((tile) => (
@@ -214,7 +214,7 @@ export default function EmpresaPage() {
               <div>
                 <strong className="text-lg">Planes desde {PRICE_FROM} al mes</strong>
                 <span className="block text-[15px] text-muted">
-                  Internet ilimitado, mismo precio con Fibra Óptica o Radio Enlace.
+                  Internet ilimitado, con la misma mensualidad en Fibra Óptica o Radio Enlace.
                 </span>
               </div>
               <Link href="/#planes" className={buttonClass("ghost")}>

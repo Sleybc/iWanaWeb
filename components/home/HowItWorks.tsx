@@ -5,41 +5,41 @@ import { PBX_DISPLAY, WHATSAPP_DISPLAY } from "@/lib/constants";
 import { ICONS } from "@/lib/icons";
 import { Eyebrow, Icon } from "../ui";
 
-// Anillo de cinco pasos (lienzo Main.dc.html, «Cómo funciona»).
+// Un mismo proceso: lista completa en móvil y anillo interactivo en computador.
 const STEPS = [
   {
     short: "Solicitud",
-    title: "Nos escribes",
-    desc: "Envíanos tu ubicación y tus datos por WhatsApp, por teléfono o en un punto de atención para agendar la visita.",
+    title: "Cuéntanos dónde estás",
+    desc: "Contáctanos por WhatsApp, teléfono o en un punto de atención para agendar la visita.",
     tip: "Ten a mano la dirección o el nombre de tu vereda.",
     icon: ICONS.whatsapp,
   },
   {
     short: "Viabilidad",
-    title: "Visitamos tu predio",
-    desc: "Un técnico revisa tu ubicación y define si te llega Fibra Óptica o Radio Enlace.",
+    title: "Revisamos cómo conectarte",
+    desc: "Visitamos tu predio sin costo y confirmamos la tecnología, el plan y las condiciones de instalación.",
     // RESUMEN §3, decisión 6: la velocidad queda en el contrato que se entrega en la visita.
-    tip: "Aquí te confirmamos por escrito la velocidad de tu plan.",
+    tip: "Te confirmamos por escrito la velocidad y el valor de instalación, si aplica, antes de contratar.",
     icon: `${ICONS.pin}M12 7a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z`,
   },
   {
     short: "Instalación",
-    title: "Instalamos el servicio",
-    desc: "Instalamos según tus necesidades, en la fecha que acordemos contigo.",
-    tip: "Con cualquiera de las dos tecnologías pagas el mismo precio.",
+    title: "Acordamos la fecha contigo",
+    desc: "Una vez aceptes las condiciones, agendamos e instalamos tu servicio.",
+    tip: "Coordinamos contigo la fecha de instalación.",
     icon: ICONS.wrench,
   },
   {
-    short: "Conectividad",
+    short: "Conexión",
     title: "Empiezas a navegar",
-    desc: "Disfruta tu plan con internet ilimitado y zona Wi-Fi desde el primer día.",
-    tip: "Los planes Medio y Alto incluyen un punto cableado.",
+    desc: "Tu servicio queda activo para que disfrutes de internet ilimitado y tu zona Wi-Fi.",
+    tip: "",
     icon: ICONS.wifi,
   },
   {
     short: "Soporte",
     title: "Seguimos contigo",
-    desc: "Estamos atentos por WhatsApp, teléfono y en nuestros tres puntos de atención.",
+    desc: "Te atendemos por WhatsApp, teléfono y en nuestros puntos de atención.",
     tip: `WhatsApp ${WHATSAPP_DISPLAY} · PBX ${PBX_DISPLAY}.`,
     icon: ICONS.headset,
   },
@@ -65,7 +65,7 @@ export function HowItWorks() {
 
   return (
     <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-      <div className="relative mx-auto aspect-square w-[min(420px,100%)]">
+      <div className="relative mx-auto hidden aspect-square w-[min(420px,100%)] lg:block">
         <svg viewBox="0 0 420 420" aria-hidden="true" className="absolute inset-0 size-full">
           <circle cx="210" cy="210" r={RADIUS} fill="none" stroke="rgb(255 255 255 / 12%)" strokeWidth="2" />
           <circle
@@ -117,23 +117,39 @@ export function HowItWorks() {
           <Eyebrow>Cómo funciona</Eyebrow>
         </span>
         <h2 className="mt-3.5 text-[clamp(1.9rem,1.2rem+2.2vw,2.75rem)] font-bold leading-[1.1] tracking-[-.028em]">
-          De la solicitud a la conexión, en cinco pasos.
+          Te conectamos y seguimos contigo.
         </h2>
-        <div className="mt-10" aria-live="polite">
+        <ol className="mt-8 ml-5 list-none border-l border-white/15 p-0 lg:hidden">
+          {STEPS.map((s, i) => (
+            <li key={s.short} className="relative pb-7 pl-9 last:pb-0">
+              <span className="absolute -left-5 top-0 grid size-10 place-items-center rounded-full border border-iwana-secondary/30 bg-deep text-sm font-bold text-iwana-secondary">
+                <span aria-hidden="true">0{i + 1}</span>
+                <span className="sr-only">Paso {i + 1}</span>
+              </span>
+              <div className="pt-0.5 text-xs font-bold uppercase tracking-[.12em] text-iwana-secondary">{s.short}</div>
+              <h3 className="mt-1.5 text-xl font-bold leading-tight">{s.title}</h3>
+              <p className="mt-2 text-base text-iwana-primary-200">{s.desc}</p>
+              {i === 1 && (
+                <p className="mt-3 rounded-control border border-white/10 bg-white/5 p-3 text-sm text-iwana-primary-100">{s.tip}</p>
+              )}
+            </li>
+          ))}
+        </ol>
+        <div className="mt-10 hidden lg:block" aria-live="polite">
           <div className="text-xs font-bold uppercase tracking-[.14em] text-iwana-secondary">
             Paso {num} · {cur.short}
           </div>
           <h3 className="mt-3 text-[clamp(1.75rem,1.3rem+1.5vw,2.25rem)] font-bold tracking-[-.02em]">{cur.title}</h3>
           <p className="mt-3.5 max-w-[520px] text-lg text-iwana-primary-200">{cur.desc}</p>
-          <div className="mt-7 flex max-w-[520px] items-start gap-3 rounded-control border border-white/10 bg-white/5 px-[18px] py-4 text-[15px] text-iwana-primary-100">
+          {cur.tip && <div className="mt-7 flex max-w-[520px] items-start gap-3 rounded-control border border-white/10 bg-white/5 px-[18px] py-4 text-[15px] text-iwana-primary-100">
             <Icon className="mt-0.5 text-iwana-secondary">
               <circle cx="12" cy="12" r="10" />
               <path d={ICONS.info} />
             </Icon>
             <span>{cur.tip}</span>
-          </div>
+          </div>}
         </div>
-        <div className="mt-8 flex flex-wrap gap-2">
+        <div className="mt-8 hidden flex-wrap gap-2 lg:flex">
           {STEPS.map((s, i) => {
             const on = i === step;
             return (
