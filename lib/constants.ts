@@ -16,6 +16,9 @@ export const PBX_TEL = "+576014954488";
 export const PBX_DISPLAY = "(601) 495 4488";
 export const EMAIL = "info@iwana.co";
 export const LEGAL_NAME = "Iwana Network S.A.S.";
+export const NIT = "900.666.794-2";
+/** Plan más económico (Básico), RESUMEN §3, decisión 8. */
+export const PRICE_FROM = "$55.000";
 
 export const WA_TEXT = {
   pago: "Hola, necesito ayuda con mi pago.",
@@ -26,6 +29,7 @@ export const WA_TEXT = {
   falla: "Hola, soy cliente de iWana y tengo una falla en mi servicio.",
   factura: "Hola, tengo una pregunta sobre mi factura.",
   viabilidad: "Hola, quiero saber si iWana llega a mi zona.",
+  vereda: "Hola, quiero saber si iWana llega a mi vereda.",
 } as const;
 
 /**
