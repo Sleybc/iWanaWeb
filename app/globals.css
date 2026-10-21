@@ -173,6 +173,10 @@
   --seg-on: #ffffff;
   --skeleton: #f3f4f6;
   --deep: #17163a;
+  --warn-bg: #fff7e6;
+  --warn-text: #7a4b00;
+  --warn-line: #f5d9a6;
+  --gauge-track: #e8e7f0;
   --card-shadow: var(--shadow-iwana);
   --card-shadow-soft: var(--shadow-iwana-soft);
   color-scheme: light;
@@ -204,6 +208,10 @@
   --seg-on: #383838;
   --skeleton: #2e2e2e;
   --deep: #121130;
+  --warn-bg: rgb(245 158 11 / 12%);
+  --warn-text: #fcd34d;
+  --warn-line: rgb(245 158 11 / 30%);
+  --gauge-track: #383838;
   --card-shadow: none;
   --card-shadow-soft: none;
   color-scheme: dark;
@@ -236,6 +244,10 @@
     --seg-on: #383838;
     --skeleton: #2e2e2e;
     --deep: #121130;
+    --warn-bg: rgb(245 158 11 / 12%);
+    --warn-text: #fcd34d;
+    --warn-line: rgb(245 158 11 / 30%);
+    --gauge-track: #383838;
     --card-shadow: none;
     --card-shadow-soft: none;
     color-scheme: dark;
@@ -270,6 +282,9 @@
   --color-seg-on: var(--seg-on);
   --color-skeleton: var(--skeleton);
   --color-deep: var(--deep);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-text: var(--warn-text);
+  --color-warn-line: var(--warn-line);
   --shadow-card: var(--card-shadow);
   --shadow-card-soft: var(--card-shadow-soft);
 

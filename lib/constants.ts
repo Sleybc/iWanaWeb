@@ -17,6 +17,8 @@ export const EMAIL = "info@iwana.co";
 export const WA_TEXT = {
   general: "Hola, quiero solicitar el servicio de internet de iWana.",
   pago: "Hola, necesito ayuda con mi pago.",
+  plan: "Hola, quiero saber la velocidad de mi plan.",
+  velocidadBaja: "Hola, mi velocidad medida fue baja.",
 } as const;
 
 /**
