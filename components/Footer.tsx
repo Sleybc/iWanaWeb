@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { EMAIL, INTEREST_LINKS, LEGAL_NAME, PBX_DISPLAY, ROUTES, WHATSAPP_DISPLAY } from "@/lib/constants";
 import { Brand } from "./Brand";
+import { ICONS } from "@/lib/icons";
 import { ExternalLink } from "./ExternalLink";
+import { Icon } from "./ui";
 
 const COLUMNS = [
   {
@@ -65,6 +67,14 @@ export function Footer() {
         <div className="mt-10 flex flex-wrap justify-between gap-3 border-t border-line pt-5 text-[13px] text-muted">
           <span>Copyright © 2026 · {LEGAL_NAME}</span>
           <span>Provincia del Tequendama · Cundinamarca</span>
+          {/* Acceso del equipo a /corporativo/ (página con noindex): visible pero discreto. */}
+          <Link
+            href={ROUTES.corporativo}
+            className="inline-flex items-center gap-1.5 font-semibold text-text no-underline hover:underline"
+          >
+            <Icon d={ICONS.lock} className="size-3.5 text-accent-text" />
+            Acceso colaboradores
+          </Link>
         </div>
       </div>
     </footer>
