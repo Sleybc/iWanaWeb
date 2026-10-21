@@ -15,7 +15,7 @@ const LOAD_TIMEOUT_MS = 15000;
 const SPEEDTEST_HOST = new URL(SPEEDTEST_URL).host;
 
 const frameClass =
-  "relative flex min-h-[460px] flex-col items-center justify-center overflow-hidden rounded-control bg-card-2 px-6 py-9 text-center";
+  "relative flex min-h-[420px] flex-col items-center justify-center overflow-hidden rounded-control bg-card-2 px-4 py-7 text-center min-[640px]:min-h-[460px] min-[640px]:px-6 min-[640px]:py-9";
 const titleClass = "mt-2 text-[1.375rem] font-bold tracking-[-.01em]";
 const textClass = "mt-2 max-w-[420px] text-sm text-muted";
 
@@ -40,7 +40,7 @@ export function SpeedTestMeter() {
   }
 
   return (
-    <div className={`${cardClass} p-3 shadow-card-soft`}>
+    <div className={`${cardClass} min-w-0 p-3 shadow-card-soft`}>
       {state === "idle" ? (
         <div className={frameClass}>
           <Gauge />
@@ -53,7 +53,7 @@ export function SpeedTestMeter() {
             </Link>
             .
           </p>
-          <button type="button" onClick={start} className={`${buttonClass("primary")} mt-[22px]`}>
+          <button type="button" onClick={start} className={`${buttonClass("primary")} mt-[22px] w-full min-[640px]:w-auto`}>
             <Icon d={ICONS.play} className="size-4" />
             Iniciar medición
           </button>
@@ -62,10 +62,10 @@ export function SpeedTestMeter() {
 
       {state === "loading" || state === "ready" ? (
         <div className="overflow-hidden rounded-control bg-card-2">
-          <div className="m-3 flex items-center gap-2 rounded-pill border border-line bg-card px-3 py-2 text-[13px] font-semibold">
-            <Icon d={ICONS.lock} className="size-4 text-accent-text" />
-            {SPEEDTEST_HOST}
-            <span className="ml-auto text-[11px] font-semibold uppercase tracking-[.08em] text-muted">
+          <div className="m-3 flex flex-wrap items-center gap-2 rounded-control border border-line bg-card px-3 py-2 text-[13px] font-semibold min-[640px]:rounded-pill">
+            <Icon d={ICONS.lock} className="size-4 shrink-0 text-accent-text" />
+            <span className="min-w-0 break-words">{SPEEDTEST_HOST}</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[.08em] text-muted min-[640px]:ml-auto">
               {state === "loading" ? "Cargando…" : "Medidor Ookla"}
             </span>
           </div>
@@ -90,11 +90,11 @@ export function SpeedTestMeter() {
           <p className={textClass}>
             Puede ser tu conexión o un bloqueador del navegador. Ábrelo en una ventana aparte o inténtalo de nuevo.
           </p>
-          <div className="mt-[22px] flex flex-wrap justify-center gap-2.5">
-            <ExternalLink href={SPEEDTEST_URL} className={buttonClass("primary")}>
+          <div className="mt-[22px] flex w-full flex-col justify-center gap-2.5 min-[640px]:w-auto min-[640px]:flex-row min-[640px]:flex-wrap">
+            <ExternalLink href={SPEEDTEST_URL} className={`${buttonClass("primary")} whitespace-normal`}>
               Abrir en otra ventana
             </ExternalLink>
-            <button type="button" onClick={start} className={buttonClass("ghost")}>
+            <button type="button" onClick={start} className={`${buttonClass("ghost")} whitespace-normal`}>
               Intentar de nuevo
             </button>
           </div>

@@ -54,7 +54,7 @@ export function ThemeSwitcher() {
             aria-label={m.label}
             title={m.label}
             onClick={() => setMode(m.key)}
-            className={`grid size-10 cursor-pointer place-items-center rounded-pill border-0 hover:text-text ${
+            className={`grid size-10 cursor-pointer place-items-center rounded-pill border-0 hover:text-text max-[360px]:size-8 ${
               on ? "bg-seg-on text-text shadow-card" : "bg-transparent text-muted"
             }`}
           >

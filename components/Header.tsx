@@ -61,7 +61,7 @@ export function Header({ current, variant = "page" }: { current?: string; varian
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-bg print:hidden">
       <div className="wrap relative">
-        <div className="flex min-h-[72px] items-center justify-between gap-4">
+        <div className="flex min-h-[72px] items-center justify-between gap-4 max-[360px]:gap-1">
           <Brand />
           <nav aria-label="Principal" className="hidden gap-[30px] min-[1080px]:flex">
             {nav.map((item) => {

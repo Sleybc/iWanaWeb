@@ -30,6 +30,7 @@ export const PRICE_FROM = "$55.000";
 export const WA_TEXT = {
   visita: "Hola, quiero solicitar una visita para revisar la disponibilidad del servicio en mi ubicación.",
   pago: "Hola, necesito ayuda con mi pago.",
+  comprobante: "Hola, quiero enviar el comprobante para registrar mi pago.",
   plan: "Hola, quiero saber la velocidad de mi plan.",
   velocidadBaja: "Hola, mi velocidad medida fue baja.",
   contacto: "Hola, quiero comunicarme con iWana.",
