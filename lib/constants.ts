@@ -118,14 +118,12 @@ export const POLICY = {
    * Fecha de entrada en vigencia de la política de Iwana S.A.S. El PDF de 2023
    * es de Iwana Network S.A.S. y no aplica a este sitio (RESUMEN §6).
    */
-  validFrom: null as string | null,
-  /** Nombre del representante legal de Iwana S.A.S. que firma. */
-  approvedBy: null as string | null,
-  /** Dirección para solicitudes escritas (oficina de atención o domicilio). */
-  claimsAddress: null as string | null,
-  /** PDF firmado en el propio dominio (p. ej. /legal/politica-datos-v1.pdf). */
-  pdfUrl: null as string | null,
-  pdfPages: null as number | null,
+  validFrom: "21 de octubre de 2026" as string | null,
+  /** Dirección para solicitudes escritas: la oficina de El Colegio (confirmado el 2026-10-21). */
+  claimsAddress: "la oficina de El Colegio, Carrera 7 # 8-55, El Colegio (Cundinamarca)" as string | null,
+  /** PDF de la política en el propio dominio (p. ej. /legal/politica-datos-v1.pdf). */
+  pdfUrl: "/legal/politica-datos-v1.pdf" as string | null,
+  pdfPages: 8 as number | null,
 };
 
 /** Cobertura (RESUMEN §4). */

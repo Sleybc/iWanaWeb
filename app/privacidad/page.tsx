@@ -33,20 +33,24 @@ const TOC = [
 const PURPOSES = [
   {
     icon: ICONS.home,
-    title: "Clientes, proveedores y aliados comerciales",
-    text: "Cumplir el contrato y el servicio, cumplir deberes legales, contables y regulatorios, comunicarnos contigo y hacer análisis y mercadeo.",
+    title: "Clientes",
+    text: "Hacer la visita de viabilidad y la instalación, cumplir el contrato, facturar y aplicar tus pagos, darte soporte, avisarte de mantenimientos y cambios, y cumplir los deberes legales y regulatorios del sector.",
   },
   {
     icon: ICONS.users,
-    title: "Clientes y proveedores potenciales",
-    text: "Comunicaciones comerciales, estudios de mercado y promoción de servicios.",
+    title: "Personas interesadas en el servicio",
+    text: "Responder tu solicitud, revisar la cobertura y agendar la visita. Solo con una autorización aparte te enviamos información comercial.",
   },
   {
     icon: ICONS.briefcase,
     title: "Empleados, contratistas y aspirantes",
-    text: "Administrar la relación laboral o contractual, cumplir deberes legales y de seguridad social, y proteger la seguridad de las personas y bienes.",
+    text: "Seleccionar personal, administrar la relación laboral o contractual, pagar y cumplir los deberes de seguridad social y de seguridad y salud en el trabajo.",
   },
-  { icon: ICONS.calendar, title: "Participantes en eventos", text: "Comunicaciones comerciales, análisis y mercadeo." },
+  {
+    icon: ICONS.receipt,
+    title: "Proveedores",
+    text: "Contratar bienes y servicios, pagar y cumplir los deberes contables y tributarios.",
+  },
 ];
 
 const infoIcon = (
@@ -119,9 +123,8 @@ export default function PrivacidadPage() {
               <MetaChip label="Vigente desde">
                 <ValidFrom />
               </MetaChip>
-              <MetaChip label="Aprobada por">
-                {POLICY.approvedBy ?? <Pending>NOMBRE DEL REPRESENTANTE LEGAL</Pending>}
-              </MetaChip>
+              {/* Sin nombre de personas: la política identifica a la empresa, no a quien la aprueba. */}
+              <MetaChip label="Versión">{POLICY.version}</MetaChip>
             </div>
           </div>
         </section>
@@ -167,7 +170,10 @@ export default function PrivacidadPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   {checkItem}
-                  <span>Los usamos solo para las finalidades que explicamos en esta política.</span>
+                  <span>
+                    Los usamos solo para las finalidades que explicamos en esta política.{" "}
+                    <strong>No vendemos ni cedemos tus datos.</strong>
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   {checkItem}
@@ -274,12 +280,16 @@ export default function PrivacidadPage() {
               </p>
               <ul className="mt-3.5 grid list-disc gap-2 pl-[22px]">
                 <li>
-                  <strong>Salud y huella dactilar:</strong> solo de empleados, contratistas y visitantes, para su
-                  bienestar y seguridad.
+                  <strong>Clientes:</strong> no tratamos datos sensibles de nuestros clientes, como origen étnico,
+                  salud, religión u orientación política.
                 </li>
                 <li>
-                  <strong>Menores de edad:</strong> solo hijos o personas a cargo de nuestros empleados y contratistas,
-                  para actividades de bienestar, respetando su interés superior.
+                  <strong>Salud:</strong> solo de empleados y contratistas, para la seguridad social, las incapacidades y
+                  la seguridad y salud en el trabajo.
+                </li>
+                <li>
+                  <strong>Menores de edad:</strong> solo hijos de nuestros empleados, para afiliarlos a la seguridad
+                  social y a beneficios, respetando su interés superior.
                 </li>
               </ul>
             </Part>
@@ -331,28 +341,27 @@ export default function PrivacidadPage() {
                     <Icon d={ICONS.fileDown} />
                   </div>
                   <div className="min-w-0">
-                    <strong className="block font-bold">Política de Privacidad y Tratamiento de Datos Personales</strong>
+                    <strong className="block font-bold">Política de tratamiento de datos personales</strong>
                     <span className="block text-sm text-muted">
-                      PDF{POLICY.pdfPages ? ` · ${POLICY.pdfPages} páginas` : null} · firmada por el representante legal{" "}
-                      {POLICY.approvedBy ? null : <Pending>PENDIENTE</Pending>}
+                      PDF{POLICY.pdfPages ? ` · ${POLICY.pdfPages} páginas` : null} · versión {POLICY.version}
                     </span>
                   </div>
                 </div>
-                {/* Sin PDF firmado en el dominio todavía (RESUMEN §6 y §8.4): no se enlaza el OneDrive personal. */}
+                {/* Sin el PDF de la política en el dominio todavía (RESUMEN §6 y §8.4): no se enlaza el OneDrive personal. */}
                 {POLICY.pdfUrl ? (
                   <a href={POLICY.pdfUrl} className={`${buttonClass("ghost")} w-full min-[640px]:w-auto min-[640px]:self-start print:hidden`} download>
                     Descargar PDF
                   </a>
                 ) : (
                   <span className="text-sm text-muted print:hidden">
-                    <Pending>PDF firmado pendiente</Pending>
+                    <Pending>PDF pendiente</Pending>
                   </span>
                 )}
               </div>
               <dl className={`${cardClass} m-0 mt-[18px] px-5 py-1 min-[640px]:hidden print:hidden`}>
                 <Fact label="Versión">{POLICY.version}</Fact>
                 <Fact label="Vigente desde"><ValidFrom /></Fact>
-                <Fact label="Cambios">Versión inicial.</Fact>
+                <Fact label="Cambios">Primera versión.</Fact>
               </dl>
               <div className="hidden overflow-x-auto min-[640px]:block print:block">
                 <table className="mt-[18px] w-full border-collapse text-[15px]">
@@ -375,7 +384,7 @@ export default function PrivacidadPage() {
                       <td className="border-b border-line px-2.5 py-3">
                         <ValidFrom />
                       </td>
-                      <td className="border-b border-line px-2.5 py-3">Versión inicial.</td>
+                      <td className="border-b border-line px-2.5 py-3">Primera versión.</td>
                     </tr>
                   </tbody>
                 </table>
